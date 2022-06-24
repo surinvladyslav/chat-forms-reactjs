@@ -1,0 +1,72 @@
+.bubble {
+  position: relative;
+  z-index: 1;
+  margin: 0 auto 0.25rem;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.bubble.is-date.is-sticky {
+  opacity: .00001;
+}
+
+.bubbles-inner.is-scrolling .is-sticky {
+  opacity: .99999 !important;
+}
+
+.bubble.service {
+  align-self: center;
+  justify-content: center;
+}
+
+.bubble.is-date {
+  position: sticky;
+  top: 0.25rem;
+  padding-bottom: 0.25rem;
+  z-index: 2;
+  transition: opacity .3s ease;
+  opacity: .99999;
+  pointer-events: none;
+}
+
+.bubble-content {
+  min-width: 56px;
+  max-width: 100%;
+  border-radius: 12px;
+  box-shadow: 0 1px 2px 0 rgb(16 35 47 / 15%);
+  position: relative;
+  display: flex;
+  flex-direction: column-reverse;
+  z-index: 2;
+  background-color: #fff;
+}
+
+.bubble.service .service-msg {
+  color: #fff;
+  background-color: hsla(85.5319, 36.9171%, 40.402%, .4);
+  font-size: .9375rem;
+  padding: 0.15rem 0.625rem;
+  line-height: 1.25rem;
+  border-radius: inherit;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  word-break: break-word;
+}
+
+.bubble.service .bubble-content {
+  background-color: transparent;
+  border-radius: 0.875rem;
+}
+
+@media (max-width: 600px) {
+
+  .bubble.service .service-msg {
+    padding: 0.15125rem 0.525rem;
+  }
+}

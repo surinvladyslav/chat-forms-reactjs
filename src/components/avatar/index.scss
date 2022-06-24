@@ -1,0 +1,21 @@
+.avatar-element {
+  --size: 2.5rem;
+  --multiplier: 1;
+  color: #fff;
+  --color-top: #72d5fd;
+  --color-bottom: #2a9ef1;
+  margin: 0 auto;
+  width: var(--size);
+  height: var(--size);
+  background: linear-gradient(var(--color-top), var(--color-bottom));
+  line-height: 2.5rem;
+  border-radius: 50%;
+  text-align: center;
+  font-size: calc(.9rem / var(--multiplier));
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  text-transform: uppercase;
+  font-weight: 500;
+}

@@ -1,0 +1,35 @@
+.whole {
+  min-height: 100%;
+  width: 100%;
+  margin: 0 auto;
+  max-width: 1680px;
+  height: 100%;
+  background: linear-gradient(30deg, #538e6d, #d2d78d, #538e6d);
+}
+
+.page-chats {
+  display: flex;
+  max-width: calc(1680px + 2px) !important;
+}
+
+.tabs-container {
+  min-width: 100%;
+  width: 100%;
+  display: grid;
+  grid-template-columns: 100%;
+  grid-template-rows: 100%;
+}
+
+.tabs-container .tabs-tab {
+  flex-direction: column;
+  grid-row-start: 1;
+  grid-column-start: 1;
+}
+
+.chats-container {
+  height: 100%;
+}
+
+.tabs-container .tabs-tab.active {
+  display: flex;
+}
