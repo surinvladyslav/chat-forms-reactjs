@@ -1,25 +1,23 @@
-.header {
+.sidebar-header {
   width: 100%;
-  background-color: transparent;
+  background-color: #5f99ca;
   position: relative;
   z-index: 100;
+  box-shadow: 0 0.25rem 0.5rem 0.1rem rgb(0 0 0 / 20%);
   flex: 0 0 auto;
+  &.base {
+    background-color: white;
+  }
 }
 
-.header-inner {
+.sidebar-header-inner {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: .5rem 0;
-}
-
-@media (max-width: 600px) {
-  .sidebar-header {
-    padding: 0 0.5rem;
-  }
-
-  .topbar .chat-info-container {
-    height: 3.3rem;
+  position: relative;
+  padding: .4rem 0;
+  &.base {
+    justify-content: flex-end;
   }
 }
 
@@ -56,6 +54,7 @@
 
 .peer-title, .topbar .info {
   max-width: 30%;
+  color: white;
   white-space: nowrap;
   text-overflow: ellipsis;
   overflow: hidden;
@@ -65,11 +64,11 @@
 }
 
 .person .bottom .online {
-  color: #3390ec;
+  color: #c7e6fc;
 }
 
 .online.typing {
-  color: #3390ec;
+  color: #c7e6fc;
   .online-text {
     display: none;
   }

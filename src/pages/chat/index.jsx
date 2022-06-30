@@ -1,27 +1,22 @@
 import * as React from 'react';
 
+import ChatInput from "../../components/chat-input";
+import SidebarHeader from "../../components/sidebar-header";
+import Content from "../../components/content";
+import ChatAnswers from "../../components/chat-answers";
+
 import './index.scss';
 import Sidebar from "../../components/sidebar";
-import Content from "../../components/content";
 
 const Chat = () => {
     return (
-        <div className="whole page-chats">
-            <div className="tabs-container">
-                <div className="tabs-tab main-column">
-                    <div className="chats-container tabs-container">
-                        <div className="chat tabs-tab active type-chat">
-                            <Sidebar/>
-                            <Content/>
-                            {/*<app-sidebar (sidebarSwitch)="sidebarSwitchHandler($event)" [sidebar]="switch"></app-sidebar>*/}
-                            {/*<app-content></app-content>*/}
-                            {/*<app-chat-input></app-chat-input>*/}
-                            {/*<app-sidebar-right (sidebarSwitch)="sidebarSwitchHandler($event)" [sidebar]="switch"></app-sidebar-right>*/}
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+        <>
+            <Sidebar/>
+            <SidebarHeader/>
+            <Content/>
+            <ChatInput/>
+            {/*<ChatAnswers/>*/}
+        </>
     );
 }
 

@@ -6,6 +6,7 @@
   color: #aaaaaa;
   background-color: transparent;
   border: none;
+  outline: none;
   overflow: inherit !important;
   width: 2rem;
   height: 2rem;
@@ -20,11 +21,128 @@
     height: 1rem;
     width: auto;
     & path {
-      fill: #aaaaaa;
+      fill: white;
+    }
+  }
+
+  &.base {
+    & svg {
+      & path {
+        fill: #aaaaaa;
+      }
     }
   }
 
   &:hover {
-    background-color: rgba(112, 117, 121, 0.08);
+    color: #3390ec;
+    background-color: rgb(0 0 0 / 11%);
+  }
+}
+
+.btn-circle {
+  --size: 54px;
+  height: 46px;
+  line-height: var(--size);
+  width: 36px;
+  align-items: center;
+  background-color: #fff;
+  border-radius: 50%;
+  bottom: calc(3.375rem + 10px);
+  color: #707579;
+  border: none;
+  display: flex;
+  font-size: 1.5rem;
+  justify-content: center;
+  overflow: visible;
+  position: absolute;
+  cursor: pointer;
+  right: 1rem;
+  z-index: 2;
+
+  & svg {
+    height: 1rem;
+    width: auto;
+    transform: rotate(-90deg);
+    & path {
+      fill: #aaaaaa;
+    }
+  }
+
+  //&:hover,
+  //&:focus {
+  //  color: #3390ec;
+  //  background-color: rgb(0 0 0 / 11%);
+  //}
+}
+
+.btn-icon.input {
+  margin: 0.55rem 0.2rem;
+}
+
+.btn-icon.switch {
+  & svg {
+    width: 1.7rem;
+    height: auto;
+    position: absolute;
+
+    & path {
+      fill: #aaaaaa;
+    }
+
+    &:first-child {
+      animation: hide-icon .4s forwards ease-in-out !important;
+    }
+
+    &:last-child {
+      animation: grow-icon .4s forwards ease-in-out !important;
+    }
+  }
+
+  &.active {
+    & svg {
+      &:first-child {
+        animation: grow-icon .4s forwards ease-in-out !important;
+      }
+
+      &:last-child {
+        animation: hide-icon .4s forwards ease-in-out !important;
+      }
+    }
+  }
+
+  &:hover {
+    & svg {
+      & path {
+        fill: #3390ec;
+        color: #3390ec;
+      }
+      color: #3390ec;
+    }
+  }
+
+}
+
+@keyframes hide-icon {
+  0% {
+    transform: scale(1);
+    opacity: .4;
+  }
+  100% {
+    transform: scale(0.5);
+    opacity: 0;
+  }
+}
+
+@keyframes grow-icon {
+  0% {
+    transform: scale(0.5);
+    opacity: .8;
+  }
+  50% {
+    transform: scale(1.1);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1);
   }
 }

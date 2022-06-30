@@ -1,11 +1,3 @@
-.bubble {
-  position: relative;
-  z-index: 1;
-  margin: 0 auto 0.25rem;
-  display: flex;
-  flex-wrap: wrap;
-}
-
 .bubble.is-date.is-sticky {
   opacity: .00001;
 }
@@ -22,7 +14,6 @@
 .bubble.is-date {
   position: sticky;
   top: 0.25rem;
-  padding-bottom: 0.25rem;
   z-index: 2;
   transition: opacity .3s ease;
   opacity: .99999;
@@ -43,9 +34,9 @@
 
 .bubble.service .service-msg {
   color: #fff;
-  background-color: hsla(85.5319, 36.9171%, 40.402%, .4);
-  font-size: .9375rem;
-  padding: 0.15rem 0.625rem;
+  background-color: rgba(74, 134, 59, 0.44);
+  font-size: 0.89rem;
+  padding: 0.1rem 0.625rem;
   line-height: 1.25rem;
   border-radius: inherit;
   -webkit-user-select: none;

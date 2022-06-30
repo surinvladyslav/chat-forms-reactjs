@@ -1,6 +1,6 @@
 import * as React from 'react';
-import {actions} from "../reducer";
-import {useContext} from "../context";
+import {actions} from "../store/reducer";
+import {useContext} from "../store/context";
 
 function useData(url, token) {
     // const [data, setData] = React.useState(false);

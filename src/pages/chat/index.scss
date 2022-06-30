@@ -1,35 +1,50 @@
-.whole {
-  min-height: 100%;
-  width: 100%;
-  margin: 0 auto;
-  max-width: 1680px;
-  height: 100%;
-  background: linear-gradient(30deg, #538e6d, #d2d78d, #538e6d);
+.chat-background, .chat-background-item {
+  bottom: 0;
+  left: 0;
+  position: absolute!important;
+  right: 0;
+  top: 0;
 }
 
-.page-chats {
+.chat-background {
+  //background-color: #e6ebee;
+  overflow: hidden;
+}
+
+.chat-background-item.is-pattern {
+  align-items: center;
+  //background-color: #000!important;
+  background-image: none!important;
+  background-repeat: repeat-x;
+  background-size: contain;
   display: flex;
-  max-width: calc(1680px + 2px) !important;
+  justify-content: center;
+  margin: 0!important;
 }
 
-.tabs-container {
-  min-width: 100%;
-  width: 100%;
-  display: grid;
-  grid-template-columns: 100%;
-  grid-template-rows: 100%;
-}
-
-.tabs-container .tabs-tab {
-  flex-direction: column;
-  grid-row-start: 1;
-  grid-column-start: 1;
-}
-
-.chats-container {
+.chat-background-item-color-canvas {
   height: 100%;
+  -webkit-mask-position: center;
+  mask-position: center;
+  -webkit-mask-size: cover;
+  mask-size: cover;
+}
+.chat-background-item-canvas {
+  --opacity-max: 1;
+  opacity: var(--opacity-max);
+  position: absolute;
+  width: 100%;
 }
 
-.tabs-container .tabs-tab.active {
-  display: flex;
+.chat-background-item:not(.is-dark) .chat-background-item-pattern-canvas {
+  mix-blend-mode: overlay;
+}
+.chat-background-item:not(.is-dark) .chat-background-item-pattern-canvas {
+  mix-blend-mode: overlay;
+}
+.chat-background-item-canvas {
+  --opacity-max: 1;
+  opacity: var(--opacity-max);
+  position: absolute;
+  width: 100%;
 }
