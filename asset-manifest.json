@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/chat-forms/static/css/main.208772cb.css",
+    "main.js": "/chat-forms/static/js/main.a6a7601b.js",
+    "index.html": "/chat-forms/index.html",
+    "main.208772cb.css.map": "/chat-forms/static/css/main.208772cb.css.map",
+    "main.a6a7601b.js.map": "/chat-forms/static/js/main.a6a7601b.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.208772cb.css",
+    "static/js/main.a6a7601b.js"
+  ]
+}
