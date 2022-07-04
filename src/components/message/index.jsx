@@ -3,32 +3,62 @@ import cx from 'classnames'
 
 import './index.scss';
 
-const Message = ({children, tail, read, edited, is}) => {
+const Message = ({children, tail, read, edited, is, itemId, date, onClick}) => {
+    // const [tick, setTick] = React.useState(read)
+    // React.useEffect(() => {
+    //     setTimeout(() => {
+    //         setTick(true)
+    //     }, 300)
+    // }, [])
     return (
-        <div className={cx('bubble', (is ? 'is-in' : 'is-out'), { 'is-read': read, 'is-edited': edited, 'can-have-tail': tail})}>
+        <div
+            className={cx('bubble', (is ? 'is-in' : 'is-out'), {
+                'is-read': read,
+                'is-edited': edited,
+                'can-have-tail': tail
+            })}
+            onClick={onClick}
+            data-id={itemId}
+        >
             <div className="bubble-content-wrapper">
                 <div className="bubble-content">
                     <div className="message">
                         {children}
                         <span className="time tgico">
-                        <span className="i18n" style={{ opacity: 0, marginLeft: '0.3rem'}}>22:22</span>
-                        <i className="edited i18n" style={{ opacity: '0 !important', margin: 0}}>edited</i>
-                        <svg className="double-tick" style={{opacity: '0'}} xmlns="http://www.w3.org/2000/svg" version="1.0" width="344.000000pt" height="344.000000pt" viewBox="0 0 344.000000 344.000000" preserveAspectRatio="xMidYMid meet">
-                            <g transform="translate(0.000000,344.000000) scale(0.100000,-0.100000)" fill="#000000" stroke="none">
-                                <path d="M2485 2805 c-19 -10 -321 -368 -810 -959 -429 -520 -785 -945 -790 -945 -6 -1 -156 146 -335 325 -179 179 -337 332 -352 340 -113 59 -238 -64 -183 -180 9 -18 194 -210 413 -428 343 -342 402 -397 434 -403 44 -8 86 0 114 23 25 20 1643 1975 1680 2029 46 69 23 162 -49 196 -43 21 -83 21 -122 2z"/>
-                                <path d="M3241 2808 c-13 -7 -368 -429 -789 -938 -421 -509 -775 -936 -788 -949 l-23 -25 -23 21 c-53 48 -120 57 -175 23 -58 -35 -81 -118 -49 -178 21 -40 176 -189 209 -201 42 -16 78 -13 113 8 23 14 1461 1738 1683 2017 56 71 52 143 -13 203 -30 28 -107 38 -145 19z"/>
-                            </g>
-                        </svg>
-                       <div className="inner tgico">
-                          <i className="edited i18n">edited</i>
-                          <span className="i18n">22:22</span>
-                              <svg className="double-tick" xmlns="http://www.w3.org/2000/svg" version="1.0" width="344.000000pt" height="344.000000pt" viewBox="0 0 344.000000 344.000000" preserveAspectRatio="xMidYMid meet">
-                                 <g transform="translate(0.000000,344.000000) scale(0.100000,-0.100000)" fill="#000000" stroke="none">
-                                    <path d="M2485 2805 c-19 -10 -321 -368 -810 -959 -429 -520 -785 -945 -790 -945 -6 -1 -156 146 -335 325 -179 179 -337 332 -352 340 -113 59 -238 -64 -183 -180 9 -18 194 -210 413 -428 343 -342 402 -397 434 -403 44 -8 86 0 114 23 25 20 1643 1975 1680 2029 46 69 23 162 -49 196 -43 21 -83 21 -122 2z"/>
-                                    <path d="M3241 2808 c-13 -7 -368 -429 -789 -938 -421 -509 -775 -936 -788 -949 l-23 -25 -23 21 c-53 48 -120 57 -175 23 -58 -35 -81 -118 -49 -178 21 -40 176 -189 209 -201 42 -16 78 -13 113 8 23 14 1461 1738 1683 2017 56 71 52 143 -13 203 -30 28 -107 38 -145 19z"/>
-                                 </g>
-                              </svg>
-                           </div>
+                            <span className="i18n" style={{ opacity: 0, marginLeft: '0.3rem'}}>{date} PM</span>
+                            <i className="edited i18n" style={{ opacity: '0 !important', margin: 0}}>edited</i>
+                            {
+                                read ?
+                                <svg className="double-tick" style={{opacity: '0'}} xmlns="http://www.w3.org/2000/svg" version="1.0" width="512.000000pt" height="512.000000pt" viewBox="0 0 512.000000 512.000000" preserveAspectRatio="xMidYMid meet">
+                                    <g transform="translate(0.000000,512.000000) scale(0.100000,-0.100000)" fill="#000000" stroke="none">
+                                        <path d="M3249 3826 c-19 -7 -45 -19 -57 -28 -12 -8 -358 -347 -770 -754 -411 -406 -840 -830 -953 -942 l-206 -203 -401 418 c-221 230 -423 435 -449 455 -130 102 -310 60 -389 -92 -29 -55 -26 -163 6 -222 16 -30 201 -229 512 -551 268 -278 512 -527 541 -554 59 -54 108 -73 183 -73 105 0 69 -33 1204 1090 580 574 1065 1057 1078 1074 69 94 49 256 -41 332 -72 61 -174 80 -258 50z"/>
+                                        <path d="M4777 3816 c-20 -8 -52 -25 -70 -40 -17 -14 -452 -442 -966 -950 l-935 -925 -63 59 c-103 96 -204 113 -315 53 -85 -46 -128 -121 -128 -223 0 -70 17 -117 61 -169 81 -94 295 -302 328 -317 20 -10 64 -20 98 -22 121 -8 57 -65 1218 1083 578 572 1060 1053 1072 1071 92 133 22 328 -136 382 -45 16 -117 14 -164 -2z"/>
+                                    </g>
+                                </svg> :
+                                <svg className="double-tick tick" style={{opacity: '0'}} xmlns="http://www.w3.org/2000/svg" version="1.0" width="512.000000pt" height="512.000000pt" viewBox="0 0 512.000000 512.000000" preserveAspectRatio="xMidYMid meet">
+                                    <g transform="translate(0.000000,512.000000) scale(0.100000,-0.100000)" fill="#000000" stroke="none">
+                                        <path d="M4605 4386 c-105 -33 -109 -36 -1445 -1372 l-1315 -1314 -595 595 c-553 551 -600 596 -662 625 -159 74 -328 51 -454 -63 -100 -90 -149 -234 -125 -364 25 -134 9 -117 839 -944 726 -724 771 -767 832 -794 78 -34 185 -44 257 -25 122 33 70 -16 1629 1543 1614 1616 1522 1517 1547 1660 34 199 -91 392 -292 453 -56 17 -162 17 -216 0z"/>
+                                    </g>
+                                </svg>
+                            }
+                            <div className="inner tgico">
+                                <i className="edited i18n">edited</i>
+                                <span className="i18n">{date} PM</span>
+                                {
+                                    read ?
+                                    <svg className="double-tick" xmlns="http://www.w3.org/2000/svg" version="1.0" width="512.000000pt" height="512.000000pt" viewBox="0 0 512.000000 512.000000" preserveAspectRatio="xMidYMid meet">
+                                        <g transform="translate(0.000000,512.000000) scale(0.100000,-0.100000)" fill="#000000" stroke="none">
+                                            <path d="M3249 3826 c-19 -7 -45 -19 -57 -28 -12 -8 -358 -347 -770 -754 -411 -406 -840 -830 -953 -942 l-206 -203 -401 418 c-221 230 -423 435 -449 455 -130 102 -310 60 -389 -92 -29 -55 -26 -163 6 -222 16 -30 201 -229 512 -551 268 -278 512 -527 541 -554 59 -54 108 -73 183 -73 105 0 69 -33 1204 1090 580 574 1065 1057 1078 1074 69 94 49 256 -41 332 -72 61 -174 80 -258 50z"/>
+                                            <path d="M4777 3816 c-20 -8 -52 -25 -70 -40 -17 -14 -452 -442 -966 -950 l-935 -925 -63 59 c-103 96 -204 113 -315 53 -85 -46 -128 -121 -128 -223 0 -70 17 -117 61 -169 81 -94 295 -302 328 -317 20 -10 64 -20 98 -22 121 -8 57 -65 1218 1083 578 572 1060 1053 1072 1071 92 133 22 328 -136 382 -45 16 -117 14 -164 -2z"/>
+                                        </g>
+                                    </svg> :
+                                    <svg className="double-tick tick"  xmlns="http://www.w3.org/2000/svg" version="1.0" width="512.000000pt" height="512.000000pt" viewBox="0 0 512.000000 512.000000" preserveAspectRatio="xMidYMid meet">
+                                        <g transform="translate(0.000000,512.000000) scale(0.100000,-0.100000)" fill="#000000" stroke="none">
+                                            <path d="M4605 4386 c-105 -33 -109 -36 -1445 -1372 l-1315 -1314 -595 595 c-553 551 -600 596 -662 625 -159 74 -328 51 -454 -63 -100 -90 -149 -234 -125 -364 25 -134 9 -117 839 -944 726 -724 771 -767 832 -794 78 -34 185 -44 257 -25 122 33 70 -16 1629 1543 1614 1616 1522 1517 1547 1660 34 199 -91 392 -292 453 -56 17 -162 17 -216 0z"/>
+                                        </g>
+                                    </svg>
+                                }
+                            </div>
                         </span>
                     </div>
                     <svg className="bubble-tail" width="9" height="20" xmlns="http://www.w3.org/2000/svg">

@@ -6,6 +6,7 @@ import Avatar from "../avatar";
 import {useContext} from "../../store/context";
 import cx from "classnames";
 import {actions} from "../../store/reducer";
+import Scrollable from "../scrollable";
 
 const Sidebar = () => {
     const {dispatch, sidebar} = useContext()
@@ -26,7 +27,13 @@ const Sidebar = () => {
                 </svg>
         },
         {
-            title: 'Bio',
+            title: 'We teach programming for free everybody from 12 to 100 years old.\n' +
+                '\n' +
+                'More than 75% of adults, who finished at least the half of study course, found the job. They study online for at least 8 month.\n' +
+                '\n' +
+                'With teens of 12-17 years old, we study design, 3d, hardware and other directions, not only programming. They study offline in Kropyvnytskyi.\n' +
+                '\n' +
+                'The studying is hard: it doesn\'t make sense without self-discipline, belief in yourself and independent work.',
             subtitle: 'Bio',
             image:    <svg className="row-icon" xmlns="http://www.w3.org/2000/svg" version="1.0"
                            width="344.000000pt" height="344.000000pt"
@@ -43,7 +50,7 @@ const Sidebar = () => {
             </svg>
         },
         {
-            title: 'Location',
+            title: 'Ukraine',
             subtitle: 'Location',
             image: <svg className="row-icon" xmlns="http://www.w3.org/2000/svg" version="1.0"
                             width="344.000000pt" height="344.000000pt"
@@ -58,7 +65,7 @@ const Sidebar = () => {
             </svg>
         },
         {
-            title: 'Link',
+            title: 'https://programming.org.ua/en',
             subtitle: 'Link',
             image:     <svg className="row-icon link" xmlns="http://www.w3.org/2000/svg" version="1.0"
                             width="344.000000pt" height="344.000000pt"
@@ -99,7 +106,7 @@ const Sidebar = () => {
         <div className={cx("sidebar-content", {'active': sidebar})}>
             <div className="tabs-tab">
                 <div className="sidebar-content-header">
-                    <Button className={'btn-icon base'} onClick={closeSidebar}>
+                    <Button className={'btn-icon silver'} onClick={closeSidebar}>
                         <svg xmlns="http://www.w3.org/2000/svg" version="1.0"
                              width="344.000000pt" height="344.000000pt" viewBox="0 0 344.000000 344.000000"
                              preserveAspectRatio="xMidYMid meet">
@@ -111,31 +118,37 @@ const Sidebar = () => {
                     </Button>
                     <h4 className="sidebar-title">Profile</h4>
                 </div>
-                <div className="profile-content">
-                    <div className="sidebar-left-section-container">
-                        <div className="sidebar-left-section no-delimiter">
-                            <div className="sidebar-left-section-content">
-                                <Avatar className="profile-avatar" size={'6rem'} font={'2rem'}>
-                                    bot
-                                </Avatar>
-                                <div className="profile-name">
-                                    <span className="peer-title">Bot</span>
-                                </div>
-                                {
-                                    data.map((row) => (
-                                        <div className="row row-with-icon row-with-padding" key={row.title}>
-                                            {row.image}
-                                            <div className="row-wrapper" dir="auto">
-                                                <div className="row-title tgico tgico-location" dir="auto">{row.title}</div>
-                                                <span className="i18n">{row.subtitle}</span>
+                <Scrollable style={{position: 'unset'}}>
+                    <div className="profile-content">
+                        <div className="sidebar-left-section-container">
+                            <div className="sidebar-left-section no-delimiter">
+                                <div className="sidebar-left-section-content">
+                                    <Avatar className="profile-avatar" size={'6rem'} font={'2rem'}>
+                                        bot
+                                    </Avatar>
+                                    <div className="profile-name">
+                                        <span className="peer-title">Bot</span>
+                                    </div>
+                                    {
+                                        data.map((row) => (
+                                            <div className="row row-with-icon row-with-padding" key={row.title}>
+                                                {row.image}
+                                                <div className="row-wrapper" dir="auto">
+                                                    {
+                                                        row.subtitle === 'Link' ?
+                                                        <a href={row.title} target="_blank" rel="noopener noreferrer">{row.title}</a> :
+                                                        <div className="row-title tgico tgico-location" dir="auto">{row.title}</div>
+                                                    }
+                                                    <span className="i18n">{row.subtitle}</span>
+                                                </div>
                                             </div>
-                                        </div>
-                                    ))
-                                }
+                                        ))
+                                    }
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
+                </Scrollable>
             </div>
         </div>
     );

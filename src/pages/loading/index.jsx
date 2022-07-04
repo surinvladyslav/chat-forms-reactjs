@@ -6,20 +6,21 @@ import './index.scss';
 import useData from "../../hooks/useData";
 import {useContext} from "../../store/context";
 import { useNavigate } from 'react-router-dom';
+import {actions} from "../../store/reducer";
 
 const Loading = () => {
     const navigate = useNavigate();
-    const {user, form} = useContext()
+    const {user, form, dispatch} = useContext()
     console.log(user.access_token);
-    console.log(form);
+    console.log(form.id);
 
-    // useData(fo)
+    // const data = useData(form.id, user.access_token)
+    // dispatch({type: actions.DATA, payload: data})
     // React.useEffect(() => {
-        // const timeout = setTimeout(() => {
-        // navigate('/home');
-        //     history.push(`/myrating/result/${params.year}/${params.subjects}/${params.scores}`);
-        // }, 1500);
-        // return () => clearTimeout(timeout);
+    //     const timeout = setTimeout(() => {
+    //         navigate('/chat');
+    //     }, 1500);
+    //     return () => clearTimeout(timeout);
     // }, []);
     return (
         <>

@@ -6,14 +6,15 @@ import { useNavigate } from 'react-router-dom';
 import { useContext } from "../../store/context";
 import { actions } from "../../store/reducer";
 import SidebarHeader from "../../components/sidebar-header";
+import useData from "../../hooks/useData";
 
 import './index.scss';
 
 const Import = () => {
     const navigate = useNavigate();
     const [openPicker, authResponse] = useDrivePicker();
-    const [data, setData] = React.useState(null)
-    const { dispatch, user, form } = useContext()
+    const [form, setForm] = React.useState(null)
+    const { dispatch } = useContext()
 
     const handleOpenPicker = async () => {
         openPicker({
@@ -21,9 +22,9 @@ const Import = () => {
             developerKey: process.env.REACT_APP_API_KEY,
             viewId: 'FORMS',
             callbackFunction: (data) => {
-                if (data.action !== 'cancel') {
-                    console.log(data);
-                    setData(data.docs[0])
+                if (data.action === 'picked') {
+                    dispatch({type: actions.LOADER, payload: true})
+                    setForm(data.docs[0])
                 }
             },
         })
@@ -32,16 +33,23 @@ const Import = () => {
     React.useEffect(() => {
         if(authResponse) {
             dispatch({type: actions.USER, payload: authResponse})
+            localStorage.setItem('auth', JSON.stringify(authResponse))
         }
     }, [authResponse])
 
     React.useEffect(() => {
-        if(data) {
-            dispatch({type: actions.LOADER, payload: true})
-            dispatch({type: actions.FORM, payload: data})
-            navigate(`/load`);
+        if(form) {
+            dispatch({type: actions.FORM, payload: form})
+            useData(form.id, authResponse.access_token).then(response => {
+                dispatch({type: actions.DATA, payload: response})
+                localStorage.setItem('aboutForm', JSON.stringify(response.info))
+                localStorage.setItem('formId', JSON.stringify(response.formId))
+                localStorage.setItem('formData', JSON.stringify(response.items))
+            })
+            dispatch({type: actions.LOADER, payload: false})
+            navigate('/chat')
         }
-    }, [data])
+    }, [form])
 
     return (
         <>

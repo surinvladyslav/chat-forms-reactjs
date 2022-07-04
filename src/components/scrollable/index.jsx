@@ -2,9 +2,9 @@ import * as React from 'react';
 
 import './index.scss';
 
-const Scrollable = ({ children }) => {
+const Scrollable = ({ children, style }) => {
     return (
-        <div className="scrollable scrollable-y">{ children }</div>
+        <div className="scrollable scrollable-y" style={style}>{ children }</div>
     );
 }
 

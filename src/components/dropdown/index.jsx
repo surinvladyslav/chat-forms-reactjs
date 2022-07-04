@@ -1,26 +1,19 @@
 import * as React from 'react';
 
-import './index.scss';
 import cx from "classnames";
 import {useContext} from "../../store/context";
 
-const Dropdown = ({ active }) => {
-    const { dropdown } = useContext()
+import './index.scss';
+
+const Dropdown = ({ children, className, style, onMouseLeave}) => {
+    const { dropdown, messageDropdown } = useContext()
     return (
-        <div className={cx("dropdown", {'open': dropdown})}
-             style={{transformOrigin: 'right top'}}>
-            <div className="compact">
-                <i className="icon-video-outlined"></i>Video Call
-            </div>
-            <div className="compact">
-                <i className="icon-mute"></i>Mute
-            </div>
-            <div className="compact">
-                <i className="icon-select"></i>Select messages
-            </div>
-            <div className="compact">
-                <i className="icon-flag"></i>Report
-            </div>
+        <div
+            className={cx(className, {'open': dropdown, 'active': messageDropdown})}
+            onMouseLeave={onMouseLeave}
+            style={style}
+        >
+            {children}
         </div>
     );
 }

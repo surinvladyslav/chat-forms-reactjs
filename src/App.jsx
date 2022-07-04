@@ -3,7 +3,6 @@ import ImportPage from "./pages/import";
 import {Route, Routes, useLocation} from "react-router-dom";
 import Loader from "./components/loader";
 import { CSSTransition } from 'react-transition-group';
-import { useContext } from "./store/context";
 import Chat from "./pages/chat";
 import Share from "./pages/share";
 import Loading from "./pages/loading";
@@ -29,7 +28,6 @@ const AppContentAnimated = ({ children }) => {
 }
 
 export default function App() {
-    const { loader } = useContext()
 
     return (
         <div className="whole page-chats">
@@ -45,7 +43,7 @@ export default function App() {
                                     <Route path="/share" element={<Share/>} />
                                     <Route path="*" element={<ImportPage/>} />
                                 </Routes>
-                                <Loader active={loader}/>
+                                <Loader/>
                             </AppContentAnimated>
                         </div>
                     </div>

@@ -9,6 +9,7 @@
 .bubble.service {
   align-self: center;
   justify-content: center;
+  margin-bottom: .5rem;
 }
 
 .bubble.is-date {
@@ -34,7 +35,7 @@
 
 .bubble.service .service-msg {
   color: #fff;
-  background-color: rgba(74, 134, 59, 0.44);
+  background-color: rgba(65, 115, 53, 0.44);
   font-size: 0.89rem;
   padding: 0.1rem 0.625rem;
   line-height: 1.25rem;

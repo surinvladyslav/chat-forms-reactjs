@@ -1,0 +1,125 @@
+.popup.active {
+  opacity: 1;
+  transition-delay: 0s,0s;
+  visibility: visible;
+  z-index: 4;
+}
+
+.popup {
+  background-color: rgba(0,0,0,.3);
+  bottom: 0;
+  box-shadow: none;
+  display: flex;
+  left: 0;
+  margin: 0;
+  max-width: none;
+  opacity: 0;
+  overflow: auto;
+  padding: 1.875rem;
+  position: fixed!important;
+  right: 0;
+  top: 0;
+  transition-delay: 0s,.15s;
+  transition-duration: .15s,0s;
+  transition-property: opacity,visibility;
+  transition-timing-function: cubic-bezier(.4,0,.2,1);
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  visibility: hidden;
+  z-index: 3;
+}
+
+.popup.active .popup-container, .popup.hiding .popup-container {
+  transform: translate3d(var(--translateX),0,0);
+}
+
+.popup-peer .popup-container {
+  max-width: min(400px,100%);
+  padding: 1rem 1.5rem 0.8125rem;
+}
+
+.popup-container {
+  --translateX: 0;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  background-color: #fff;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  margin: auto;
+  overflow: hidden;
+  padding: 1rem;
+  position: relative;
+  transform: translate3d(var(--translateX),3rem,0);
+  transition: transform .15s cubic-bezier(.4,0,.2,1);
+}
+
+.z-depth-1 {
+  box-shadow: 0 2px 2px 0 rgb(0 0 0 / 14%), 0 3px 1px -2px rgb(0 0 0 / 12%), 0 1px 5px 0 rgb(0 0 0 / 20%);
+}
+
+.popup-peer .popup-header {
+  align-items: center;
+  display: flex;
+}
+
+.popup-peer .popup-title {
+  font-size: 1.25rem;
+  font-weight: 500;
+  margin-bottom: 0.125rem;
+}
+
+.popup-peer .popup-description {
+  line-height: 1.3125;
+  margin-bottom: 0;
+  margin-top: 0;
+  max-width: -webkit-fit-content;
+  max-width: fit-content;
+  min-width: 15rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  word-break: break-word;
+}
+
+.popup-peer .popup-container.have-checkbox .popup-buttons {
+  margin-top: 0.5625rem;
+}
+
+.popup-buttons-row {
+  flex-direction: row-reverse;
+  display: flex;
+  justify-content: flex-start;
+}
+
+.popup-buttons .btn {
+  border-radius: 8px;
+  font-weight: 500;
+  max-width: 100%;
+  padding: 0.5rem;
+  position: relative;
+  text-transform: uppercase;
+}
+
+.danger {
+  color: #df3f40!important;
+  &:hover {
+    background-color: rgba(223,63,64,.08);
+  }
+}
+
+.btn, .btn-icon {
+  background: none;
+  border: none;
+  cursor: pointer;
+  outline: none;
+}
+
+.primary {
+  color: #3390ec!important;
+  margin-right: 1rem;
+  &:hover {
+    background-color: rgba(51,144,236,.08);
+  }
+}

@@ -4,6 +4,7 @@
   z-index: 990;
   display: block;
   list-style: none;
+  transform-origin: right top;
   opacity: 0;
   padding: 0.5rem 0;
   top: calc(100% + 0.5rem);
@@ -48,5 +49,87 @@
   &:focus {
     background-color: rgba(0,0,0,0.0666667);
     color: whitesmoke;
+  }
+}
+
+.dropdown-message.bottom-center {
+  transform-origin: center top;
+}
+
+.dropdown-message.active {
+  opacity: 1;
+  transform: scaleX(1)!important;
+  visibility: visible;
+}
+
+.contextmenu {
+  bottom: auto!important;
+  position: fixed!important;
+  right: auto!important;
+  width: auto!important;
+  z-index: 10050!important;
+}
+
+.dropdown-message {
+  box-shadow: 0 0 10px rgb(0 0 0 / 15%);
+}
+
+.dropdown-message {
+  backdrop-filter: blur(50px);
+  background-color: #f8f9f7;
+  border-radius: 10px;
+  font-size: 1rem;
+  min-width: 11.25rem;
+  opacity: 0;
+  padding: 0.3125rem 0;
+  position: absolute;
+  top: 100%;
+  transform: scale(.8)!important;
+  transition: opacity .2s cubic-bezier(.4,0,.2,1),transform .2s cubic-bezier(.4,0,.2,1),visibility .2s cubic-bezier(.4,0,.2,1);
+  -webkit-user-select: none;
+  visibility: hidden;
+  z-index: 3;
+}
+
+.dropdown-message-item {
+  --padding-left: .75rem;
+  --padding-right: .75rem;
+  --icon-margin: 1.25rem;
+  --icon-size: 1.25rem;
+  align-items: center;
+  border-radius: 0.3125rem;
+  color: #000;
+  cursor: pointer!important;
+  display: flex;
+  font-size: 14px;
+  font-weight: 500;
+  height: 2rem;
+  line-height: 18px;
+  margin: 0 0.3125rem;
+  padding: 0 var(--padding-right) 0 var(--padding-left);
+  pointer-events: all!important;
+  position: relative;
+  text-align: left;
+  text-transform: none;
+  transform: scale(1);
+  white-space: nowrap;
+
+  &:hover,
+  &:focus {
+    background-color: rgba(0,0,0,0.0666667);
+  }
+
+  & svg {
+    height: 1.2rem;
+    width: auto;
+    margin-right: .8rem;
+  }
+
+  &.danger {
+    color: #df3f40!important;
+
+    & svg path {
+      fill: #df3f40;
+    }
   }
 }

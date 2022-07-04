@@ -44,6 +44,11 @@ html:not(.is-safari):not(.is-ios) ::-webkit-scrollbar-thumb {
   transition: .2s ease-in-out;
 }
 
+a {
+  text-decoration: none;
+  color: #00488f;
+}
+
 img, video {
   -webkit-user-drag: none;
 }

@@ -23,6 +23,8 @@
         "no-unused-vars": "off",
         "react/no-unknown-property": "off",
         "react/no-unescaped-entities": 0,
-        "react/react-in-jsx-scope": "off"
+        "react/react-in-jsx-scope": "off",
+        "semi": "off",
+        "@typescript-eslint/semi": "off"
     }
 }

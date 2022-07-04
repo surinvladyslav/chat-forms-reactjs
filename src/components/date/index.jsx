@@ -1,14 +1,21 @@
 import * as React from 'react';
 
-import './index.scss';
-import Moment from "moment";
+import cx from "classnames";
+import {useContext} from "../../store/context";
+import { format } from 'date-fns';
 
-const Date = ({ date }) => {
+import './index.scss';
+
+const Date = () => {
+    const { messages } = useContext()
+    const date = new window.Date();
     return (
-        <div className="bubble service is-date">
+        <div className={cx("bubble service is-date", {'is-sticky': messages.length === 0})}>
             <div className="bubble-content">
                 <div className="service-msg">
-                    <span className="i18n">{Moment(new window.Date()).format('MMMM d')}</span>
+                    <span className="i18n">{
+                        format(date,'MMMM d')
+                    }</span>
                 </div>
             </div>
         </div>

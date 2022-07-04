@@ -16,110 +16,125 @@
   align-items: center;
   justify-content: center;
   cursor: pointer;
-
   & svg {
     height: 1rem;
     width: auto;
-    & path {
+  }
+
+  &.white {
+    & svg path {
       fill: white;
     }
   }
 
-  &.base {
-    & svg {
-      & path {
-        fill: #aaaaaa;
-      }
+  &.silver {
+    & svg path {
+      fill: #aaaaaa;
+    }
+  }
+
+  &.blue {
+    & svg path {
+      fill: #3390ec;
     }
   }
 
   &:hover {
-    color: #3390ec;
     background-color: rgb(0 0 0 / 11%);
   }
 }
 
-.btn-circle {
-  --size: 54px;
-  height: 46px;
-  line-height: var(--size);
-  width: 36px;
-  align-items: center;
-  background-color: #fff;
-  border-radius: 50%;
-  bottom: calc(3.375rem + 10px);
-  color: #707579;
-  border: none;
-  display: flex;
-  font-size: 1.5rem;
-  justify-content: center;
-  overflow: visible;
-  position: absolute;
-  cursor: pointer;
-  right: 1rem;
-  z-index: 2;
-
-  & svg {
-    height: 1rem;
-    width: auto;
-    transform: rotate(-90deg);
-    & path {
-      fill: #aaaaaa;
-    }
-  }
-
-  //&:hover,
-  //&:focus {
-  //  color: #3390ec;
-  //  background-color: rgb(0 0 0 / 11%);
-  //}
-}
-
 .btn-icon.input {
-  margin: 0.55rem 0.2rem;
+  margin: 0.6rem 0.2rem;
 }
 
-.btn-icon.switch {
-  & svg {
-    width: 1.7rem;
-    height: auto;
-    position: absolute;
-
-    & path {
-      fill: #aaaaaa;
-    }
-
-    &:first-child {
-      animation: hide-icon .4s forwards ease-in-out !important;
-    }
-
-    &:last-child {
-      animation: grow-icon .4s forwards ease-in-out !important;
-    }
-  }
-
-  &.active {
+.btn-icon {
+  &.send {
     & svg {
-      &:first-child {
+      width: 1.7rem;
+      height: auto;
+      position: absolute;
+      &:nth-child(1) {
         animation: grow-icon .4s forwards ease-in-out !important;
       }
 
-      &:last-child {
+      &:nth-child(2) {
+        animation: hide-icon .4s forwards ease-in-out !important;
+      }
+
+      &:nth-child(3) {
         animation: hide-icon .4s forwards ease-in-out !important;
       }
     }
   }
 
-  &:hover {
+  &.microphone {
     & svg {
-      & path {
-        fill: #3390ec;
-        color: #3390ec;
+      width: 1.7rem;
+      height: auto;
+      position: absolute;
+      &:nth-child(1) {
+        animation: hide-icon .4s forwards ease-in-out !important;
       }
-      color: #3390ec;
+
+      &:nth-child(2) {
+        animation: grow-icon .4s forwards ease-in-out !important;
+      }
+
+      &:nth-child(3) {
+        animation: hide-icon .4s forwards ease-in-out !important;
+      }
     }
   }
 
+  &.check {
+    & svg {
+      height: auto;
+      position: absolute;
+      width: 1.1rem;
+      &:nth-child(1) {
+        animation: hide-icon .4s forwards ease-in-out !important;
+      }
+
+      &:nth-child(2) {
+        animation: hide-icon .4s forwards ease-in-out !important;
+      }
+
+      &:nth-child(3) {
+        animation: grow-icon .4s forwards ease-in-out !important;
+      }
+    }
+  }
+
+  &.emoji {
+    & svg {
+      width: 1.7rem;
+      height: auto;
+      position: absolute;
+      &:nth-child(1) {
+        animation: grow-icon .4s forwards ease-in-out !important;
+      }
+
+      &:nth-child(2) {
+        animation: hide-icon .4s forwards ease-in-out !important;
+      }
+    }
+  }
+
+  &.keyboard {
+    & svg {
+      width: 1.7rem;
+      height: auto;
+      position: absolute;
+      &:nth-child(1) {
+        animation: hide-icon .4s forwards ease-in-out !important;
+      }
+
+      &:nth-child(2) {
+        animation: grow-icon .4s forwards ease-in-out !important;
+      }
+    }
+  }
 }
 
 @keyframes hide-icon {
