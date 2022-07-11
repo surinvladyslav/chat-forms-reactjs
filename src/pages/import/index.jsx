@@ -32,8 +32,7 @@ const Import = () => {
 
     React.useEffect(() => {
         if(authResponse) {
-            dispatch({type: actions.USER, payload: authResponse})
-            localStorage.setItem('auth', JSON.stringify(authResponse))
+            dispatch({type: actions.AUTH, payload: authResponse})
         }
     }, [authResponse])
 
@@ -42,9 +41,9 @@ const Import = () => {
             dispatch({type: actions.FORM, payload: form})
             useData(form.id, authResponse.access_token).then(response => {
                 dispatch({type: actions.DATA, payload: response})
-                localStorage.setItem('aboutForm', JSON.stringify(response.info))
-                localStorage.setItem('formId', JSON.stringify(response.formId))
-                localStorage.setItem('formData', JSON.stringify(response.items))
+                dispatch({type: actions.ABOUT_FORM, payload: response.info})
+                dispatch({type: actions.FORM_ID, payload: response.formId})
+                dispatch({type: actions.FORM_DATA, payload: response.items})
             })
             dispatch({type: actions.LOADER, payload: false})
             navigate('/chat')

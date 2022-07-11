@@ -10,7 +10,9 @@ const Date = () => {
     const { messages } = useContext()
     const date = new window.Date();
     return (
-        <div className={cx("bubble service is-date", {'is-sticky': messages.length === 0})}>
+        <div className={cx("bubble service is-date is-sticky")}>
+
+        {/*<div className={cx("bubble service is-date", {'is-sticky': messages.length === 0})}>*/}
             <div className="bubble-content">
                 <div className="service-msg">
                     <span className="i18n">{

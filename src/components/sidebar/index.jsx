@@ -84,7 +84,6 @@ const Sidebar = () => {
     ]
 
     const escFunction = React.useCallback((event) => {
-        event.preventDefault();
         if (event.keyCode === 27) {
             dispatch({type: actions.SIDEBAR, payload: false})
         }

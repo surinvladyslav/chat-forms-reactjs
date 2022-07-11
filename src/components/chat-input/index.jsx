@@ -1,4 +1,5 @@
 import * as React from 'react';
+import {useEffect, useRef} from "react";
 import cx from "classnames";
 
 import Button from "../button";
@@ -9,30 +10,36 @@ import random from "../../hooks/useRandom";
 import './index.scss';
 
 const ChatInput = ({id}) => {
-    const {dispatch, messages, edited, formData} = useContext()
-    const [text, setText] = React.useState(JSON.parse(localStorage.getItem('draft')))
+    const textareaEl = useRef(null);
+    const {dispatch, messages, edited, draft} = useContext()
+    const [text, setText] = React.useState(draft)
+
+    useEffect(() => {
+        if (edited) {
+            textareaEl.current.textContent = messages.find((message) => message.itemId === id).title;
+        }
+        if (text) {
+            textareaEl.current.textContent = text;
+        }
+    }, [edited, text]);
 
     function editMessage() {
-        dispatch({type: actions.CHANGE_MESSAGE, payload: {
-                title: text,
-                edited: true,
-                id: id,
-            }})
+        if (text) {
+            dispatch({
+                type: actions.CHANGE_MESSAGE, payload: {
+                    title: text,
+                    edited: true,
+                    id: id,
+                }
+            })
+            dispatch({type: actions.EDITED, payload: false})
+            textareaEl.current.textContent = "";
+            setText("");
+        }
     }
 
     function createMessage() {
-        // dispatch({type: actions.ADD_MESSAGE, payload: {
-        //         ...formData[0],
-        //         tail: true,
-        //         is: true,
-        //         edited: false,
-        //             date: new Date().toLocaleTimeString('en-GB', {
-        //             hour12: false,
-        //             hour: "numeric",
-        //             minute: "numeric"
-        //         }).toString(),
-        //     }})
-        if(text) {
+        if (text) {
             dispatch({type: actions.ADD_MESSAGE, payload: {
                     title: text,
                     itemId: random(),
@@ -46,6 +53,8 @@ const ChatInput = ({id}) => {
                         minute: "numeric"
                     }).toString(),
                 }})
+            textareaEl.current.textContent = "";
+            setText("");
         }
     }
 
@@ -107,22 +116,29 @@ const ChatInput = ({id}) => {
                             <div className="input-message-container">
                                 <div
                                     className="input-message-input scrollable scrollable-y i18n no-scrollbar"
+                                    ref={textareaEl}
                                     contentEditable={true}
+                                    suppressContentEditableWarning={true}
                                     dir="auto"
-                                    value={edited ? messages.find((message) => message.itemId === id).title : text}
-                                    onChange={(event) => {
-                                        setText(event.target.value)
-                                        localStorage.setItem('draft', JSON.stringify(event.target.value))
+                                    onInput={(event) => {
+                                        textareaEl.current.textContent = event.target.textContent
+                                        setText(event.target.textContent)
+                                        dispatch({type: actions.DRAFT, payload: event.target.textContent})
                                     }}
                                     data-placeholder="Message"
                                     style={{transitionDuration: '181ms'}}
-                                ></div>
+                                    onKeyPress={event => {
+                                        if (event.key === 'Enter') {
+                                            edited ? editMessage() : createMessage()
+                                        }
+                                    }}
+                                />
                             </div>
 
                             {/*<Button className={'btn-icon input'}>⌘</Button>*/}
 
                             <Button
-                                className={cx('btn-icon blue input', {'send': edited ? false : text, 'check': edited, 'microphone': edited ? false : !text})}
+                                className={cx('btn-icon blue input', {'send': edited ? false : true, 'check': edited, 'microphone': edited ? false : !text})}
                                 onClick={edited ? editMessage : createMessage}
                             >
                                 <svg className="tgico tgico-send" xmlns="http://www.w3.org/2000/svg" version="1.0"

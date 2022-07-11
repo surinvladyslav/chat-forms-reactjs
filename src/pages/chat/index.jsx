@@ -51,7 +51,6 @@ const Chat = () => {
     };
 
     function onClick(event){
-        event.preventDefault()
         setX(event.pageX)
         setY(event.pageY)
         dispatch({type: actions.MESSAGE_DROPDOWN, payload: true})

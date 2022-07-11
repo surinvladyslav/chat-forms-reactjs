@@ -16,12 +16,10 @@ const SidebarHeader = () => {
     const {dispatch, sidebar, dropdown} = useContext()
 
     function openSidebar(event) {
-        event.preventDefault();
         dispatch({type: actions.SIDEBAR, payload: !sidebar})
     }
 
     const escFunction = React.useCallback((event) => {
-        event.preventDefault();
         if (event.keyCode === 27) {
             dispatch({type: actions.DROPDOWN, payload: false})
         }

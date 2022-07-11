@@ -8,7 +8,7 @@ import {useContext} from "../../store/context";
 import './index.scss';
 
 const Content = ({onClick}) => {
-    const { messages } = useContext()
+    const { messages, formData } = useContext()
     return (
         <div className="bubbles">
             <Scrollable>
@@ -16,33 +16,33 @@ const Content = ({onClick}) => {
                     <div className="bubbles-date-group">
                         <Date/>
                         <div className="bubbles-group">
-                            {/*{*/}
-                            {/*    formData ?*/}
-                            {/*        // formData.filter((item, index) => index < formData.length)*/}
-                            {/*        // .map((item) => (*/}
-                            {/*        //     <Message*/}
-                            {/*        //         tail={true}*/}
-                            {/*        //         edited={false}*/}
-                            {/*        //         read={true}*/}
-                            {/*        //         is={true}*/}
-                            {/*        //         id={item.itemId}*/}
-                            {/*        //         key={item.itemId}*/}
-                            {/*        //     >{item.title}</Message>*/}
-                            {/*        // ))*/}
-                            {/*        formData.map((item) => (*/}
-                            {/*            <Message*/}
-                            {/*                tail={item.tail ? true : false}*/}
-                            {/*                edited={false}*/}
-                            {/*                onClick={onClick}*/}
-                            {/*                read={item.read ? true : false}*/}
-                            {/*                is={true}*/}
-                            {/*                date={item.date}*/}
-                            {/*                id={item.itemId}*/}
-                            {/*                key={item.itemId}*/}
-                            {/*            >{item.title}</Message>*/}
-                            {/*        ))*/}
-                            {/*        : ''*/}
-                            {/*}*/}
+                            {
+                                formData ?
+                                    // formData.filter((item, index) => index < formData.length)
+                                    // .map((item) => (
+                                    //     <Message
+                                    //         tail={true}
+                                    //         edited={false}
+                                    //         read={true}
+                                    //         is={true}
+                                    //         id={item.itemId}
+                                    //         key={item.itemId}
+                                    //     >{item.title}</Message>
+                                    // ))
+                                    formData.map((item) => (
+                                        <Message
+                                            tail={item.tail ? true : false}
+                                            edited={false}
+                                            onClick={onClick}
+                                            read={item.read ? true : false}
+                                            is={true}
+                                            date={item.date}
+                                            id={item.itemId}
+                                            key={item.itemId}
+                                        >{item.title}</Message>
+                                    ))
+                                    : ''
+                            }
                             {
                                 messages &&
                                 messages.map((item) => (

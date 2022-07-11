@@ -1,31 +1,49 @@
-import React from 'react';
-import {baseReducer} from "../reducer";
+import React, {createContext, useEffect, useReducer} from 'react';
+import rootReducer from "../reducer";
+import messagesReducer from "../reducer/messages";
+import useCombinedReducers from "../../hooks/useCombine";
+import formsReducer from "../reducer/forms";
 
-const AppContext = React.createContext(undefined);
+const AppContext = createContext(undefined);
 
 export const Context = ({children}) => {
-    const formData = JSON.parse(localStorage.getItem('formData'));
-    const formId = JSON.parse(localStorage.getItem('formId'));
-    const auth = JSON.parse(localStorage.getItem('auth'));
-    const messages = JSON.parse(localStorage.getItem('messages'));
-    const aboutForm = JSON.parse(localStorage.getItem('aboutForm'));
+    const store = JSON.parse(localStorage.getItem('store'));
 
-    const [state, dispatch] = React.useReducer(baseReducer, {
-        auth: auth ? auth : null,
-        messages: messages ? messages : [],
-        formId: formId ? formId : null,
-        formData: formData ? formData : null,
-        aboutForm: aboutForm ? aboutForm : null,
-        loader: false,
-        sidebar: false,
-        dropdown: false,
-        messageDropdown: false,
-        popup: false,
-        popupCopied: false,
-        edited: false,
-    })
-    // const store = React.useMemo(() => [...state, dispatch], [state]);
-    return <AppContext.Provider value={{...state, dispatch}}>{ children }</AppContext.Provider>
+    const [state, dispatch] = useCombinedReducers({
+        rootState: useReducer(rootReducer, {
+            loader: false,
+            sidebar: false,
+            draft: store?.draft ? store.draft : "",
+            dropdown: false,
+            popup: false,
+            popupCopied: false,
+        }),
+        messageState: useReducer(messagesReducer, {
+            messages: store?.messages ? store.messages : [],
+            messageDropdown: false,
+            edited: false,
+        }),
+        formsState: useReducer(formsReducer, {
+            auth: store?.auth ? store.auth : null,
+            data: store?.data ? store.data : null,
+            formId: store?.formId ? store.formId : null,
+            form: store?.form ? store.form : null,
+            formData: store?.formData ? store.formData : null,
+            aboutForm: store?.aboutForm ? store.aboutForm : null,
+        }),
+    });
+
+    const { rootState, messageState, formsState } = state;
+
+    useEffect(() => {
+        try {
+            localStorage.setItem('store', JSON.stringify({...rootState, ...messageState, ...formsState}))
+        } catch (error) {
+            console.log(error);
+        }
+    }, [rootState, messageState, formsState])
+
+    return <AppContext.Provider value={{...rootState, ...messageState, ...formsState, dispatch}}>{ children }</AppContext.Provider>
 };
 
 export const useContext = () => {

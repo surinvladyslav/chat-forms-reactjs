@@ -25,7 +25,7 @@ const Message = ({children, tail, read, edited, is, itemId, date, onClick}) => {
                     <div className="message">
                         {children}
                         <span className="time tgico">
-                            <span className="i18n" style={{ opacity: 0, marginLeft: '0.3rem'}}>{date} PM</span>
+                            <span className="i18n" style={{ opacity: 0, marginLeft: '0.5rem'}}>{date} PM</span>
                             <i className="edited i18n" style={{ opacity: '0 !important', margin: 0}}>edited</i>
                             {
                                 read ?
