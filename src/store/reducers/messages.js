@@ -4,19 +4,21 @@ const messagesReducer = (state, action) => {
     const {type, payload} = action;
     switch(type) {
         case actions.ADD_MESSAGE:
-            return {...state, messages: [...state.messages, payload]}
+            return {...state, chatMessages: [...state.chatMessages, payload]}
         case actions.DELETE_MESSAGE:
-            return {...state, messages: state.messages.filter(c => c.itemId !== payload)}
+            return {...state, chatMessages: state.chatMessages.filter(c => c.itemId !== payload)}
         case actions.CHANGE_MESSAGE:
-            state.messages.find(message => {
+            state.chatMessages.find(message => {
                 if (message.itemId === payload.id) {
                     message.title = payload.title;
                     message.edited = payload.edited;
                 }
             })
-            return {...state, messages: [...state.messages]}
+            return {...state, chatMessages: [...state.chatMessages]}
         case actions.MESSAGE_DROPDOWN:
             return {...state, messageDropdown: payload}
+        case actions.CLEAR_MESSAGES:
+            return {...state, chatMessages: []}
         case actions.EDITED:
             return {...state, edited: payload}
         default:

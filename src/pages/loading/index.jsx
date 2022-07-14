@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 
 import Loader from "../../components/loader";
 
@@ -6,7 +6,7 @@ import './index.scss';
 import useData from "../../hooks/useData";
 import {useContext} from "../../store/context";
 import { useNavigate } from 'react-router-dom';
-import {actions} from "../../store/reducer";
+import {actions} from "../../store/reducers";
 
 const Loading = () => {
     const navigate = useNavigate();
@@ -16,7 +16,7 @@ const Loading = () => {
 
     // const data = useData(form.id, user.access_token)
     // dispatch({type: actions.DATA, payload: data})
-    // React.useEffect(() => {
+    //  useEffect(() => {
     //     const timeout = setTimeout(() => {
     //         navigate('/chat');
     //     }, 1500);

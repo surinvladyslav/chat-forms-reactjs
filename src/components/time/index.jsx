@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 
 import cx from "classnames";
 import {useContext} from "../../store/context";
@@ -6,13 +6,11 @@ import { format } from 'date-fns';
 
 import './index.scss';
 
-const Date = () => {
-    const { messages } = useContext()
+const Time = () => {
+    const { chatMessages } = useContext()
     const date = new window.Date();
     return (
-        <div className={cx("bubble service is-date is-sticky")}>
-
-        {/*<div className={cx("bubble service is-date", {'is-sticky': messages.length === 0})}>*/}
+        <div className={cx("bubble service is-date", {'is-sticky': chatMessages && chatMessages.length === 0})}>
             <div className="bubble-content">
                 <div className="service-msg">
                     <span className="i18n">{
@@ -24,4 +22,4 @@ const Date = () => {
     );
 }
 
-export default Date;
+export default Time;

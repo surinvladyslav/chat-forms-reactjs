@@ -1,8 +1,8 @@
 import React, {createContext, useEffect, useReducer} from 'react';
-import rootReducer from "../reducer";
-import messagesReducer from "../reducer/messages";
+import rootReducer from "../reducers";
+import messagesReducer from "../reducers/messages";
 import useCombinedReducers from "../../hooks/useCombine";
-import formsReducer from "../reducer/forms";
+import formsReducer from "../reducers/forms";
 
 const AppContext = createContext(undefined);
 
@@ -11,39 +11,38 @@ export const Context = ({children}) => {
 
     const [state, dispatch] = useCombinedReducers({
         rootState: useReducer(rootReducer, {
-            loader: false,
-            sidebar: false,
-            draft: store?.draft ? store.draft : "",
-            dropdown: false,
-            popup: false,
-            popupCopied: false,
+            appLoader: false,
+            chatSidebar: false,
+            chatIndex: store?.chatIndex ? store.chatIndex : 0,
+            chatTyping: false,
+            chatDraft: store?.chatDraft ? store.chatDraft : "",
+            chatDropdown: false,
+            chatPopupConfirm: false,
+            chatAnswers: false,
+            chatPopupCopied: false,
         }),
         messageState: useReducer(messagesReducer, {
-            messages: store?.messages ? store.messages : [],
+            chatMessages: store?.chatMessages ? store.chatMessages : [],
             messageDropdown: false,
-            edited: false,
+            editMessage: false,
         }),
         formsState: useReducer(formsReducer, {
-            auth: store?.auth ? store.auth : null,
-            data: store?.data ? store.data : null,
-            formId: store?.formId ? store.formId : null,
-            form: store?.form ? store.form : null,
+            googleAuth: store?.googleAuth ? store.googleAuth : null,
             formData: store?.formData ? store.formData : null,
-            aboutForm: store?.aboutForm ? store.aboutForm : null,
+            formId: store?.formId ? store.formId : null,
+            formBaseData: store?.formBaseData ? store.formBaseData : null,
         }),
     });
 
-    const { rootState, messageState, formsState } = state;
-
     useEffect(() => {
         try {
-            localStorage.setItem('store', JSON.stringify({...rootState, ...messageState, ...formsState}))
+            localStorage.setItem('store', JSON.stringify(state))
         } catch (error) {
             console.log(error);
         }
-    }, [rootState, messageState, formsState])
+    }, [state])
 
-    return <AppContext.Provider value={{...rootState, ...messageState, ...formsState, dispatch}}>{ children }</AppContext.Provider>
+    return <AppContext.Provider value={{...state, dispatch}}>{ children }</AppContext.Provider>
 };
 
 export const useContext = () => {

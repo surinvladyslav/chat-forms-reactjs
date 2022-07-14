@@ -1,22 +1,23 @@
-import * as React from 'react';
+import React, {useState} from 'react';
 import {useEffect, useRef} from "react";
 import cx from "classnames";
 
 import Button from "../button";
 import {useContext} from "../../store/context";
-import {actions} from "../../store/reducer";
+import {actions} from "../../store/reducers";
 import random from "../../hooks/useRandom";
+import ChatAnswers from "../chat-answers";
 
 import './index.scss';
 
-const ChatInput = ({id}) => {
+const ChatInput = ({messageId}) => {
     const textareaEl = useRef(null);
-    const {dispatch, messages, edited, draft} = useContext()
-    const [text, setText] = React.useState(draft)
+    const {dispatch, chatMessages, edited, chatDraft, chatAnswers, chatIndex} = useContext()
+    const [text, setText] = useState(chatDraft)
 
     useEffect(() => {
         if (edited) {
-            textareaEl.current.textContent = messages.find((message) => message.itemId === id).title;
+            textareaEl.current.textContent = chatMessages.find((message) => message.itemId === messageId).title;
         }
         if (text) {
             textareaEl.current.textContent = text;
@@ -29,7 +30,7 @@ const ChatInput = ({id}) => {
                 type: actions.CHANGE_MESSAGE, payload: {
                     title: text,
                     edited: true,
-                    id: id,
+                    id: messageId,
                 }
             })
             dispatch({type: actions.EDITED, payload: false})
@@ -40,7 +41,8 @@ const ChatInput = ({id}) => {
 
     function createMessage() {
         if (text) {
-            dispatch({type: actions.ADD_MESSAGE, payload: {
+            dispatch({
+                type: actions.ADD_MESSAGE, payload: {
                     title: text,
                     itemId: random(),
                     tail: true,
@@ -52,9 +54,12 @@ const ChatInput = ({id}) => {
                         hour: "numeric",
                         minute: "numeric"
                     }).toString(),
-                }})
+                }
+            })
             textareaEl.current.textContent = "";
             setText("");
+            dispatch({type: actions.CHAT_INDEX})
+            dispatch({type: actions.CHAT_TYPING, payload: true})
         }
     }
 
@@ -80,7 +85,7 @@ const ChatInput = ({id}) => {
                         <div className="new-message-wrapper">
                             <Button
                                 className={cx('btn-icon silver input', {'keyboard': !edited, 'emoji': edited})}
-                                onClick={()=> console.log('click')}
+                                onClick={() => console.log('click')}
                             >
                                 <svg className="keyboard" xmlns="http://www.w3.org/2000/svg" version="1.0" width="512.000000pt" height="512.000000pt" viewBox="0 0 512.000000 512.000000" preserveAspectRatio="xMidYMid meet">
                                     <g transform="translate(0.000000,512.000000) scale(0.100000,-0.100000)" fill="#000000" stroke="none">
@@ -123,7 +128,7 @@ const ChatInput = ({id}) => {
                                     onInput={(event) => {
                                         textareaEl.current.textContent = event.target.textContent
                                         setText(event.target.textContent)
-                                        dispatch({type: actions.DRAFT, payload: event.target.textContent})
+                                        dispatch({type: actions.CHAT_DRAFT, payload: event.target.textContent})
                                     }}
                                     data-placeholder="Message"
                                     style={{transitionDuration: '181ms'}}
@@ -135,10 +140,17 @@ const ChatInput = ({id}) => {
                                 />
                             </div>
 
-                            {/*<Button className={'btn-icon input'}>⌘</Button>*/}
+                            <Button
+                                className={'btn-icon input'}
+                                onClick={() => dispatch({type: actions.CHAT_ANSWERS, payload: !chatAnswers})}
+                            >⌘</Button>
 
                             <Button
-                                className={cx('btn-icon blue input', {'send': edited ? false : true, 'check': edited, 'microphone': edited ? false : !text})}
+                                className={cx('btn-icon blue input', {
+                                    'send': edited ? false : true,
+                                    'check': edited,
+                                    'microphone': edited ? false : !text
+                                })}
                                 onClick={edited ? editMessage : createMessage}
                             >
                                 <svg className="tgico tgico-send" xmlns="http://www.w3.org/2000/svg" version="1.0"
@@ -169,7 +181,7 @@ const ChatInput = ({id}) => {
                                     </g>
                                 </svg>
                             </Button>
-                            {/*<app-answers (sidebarAnswers)="answersSwitchHandler($event)" [answers]="answers"></app-answers>*/}
+                            <ChatAnswers/>
                         </div>
                     </div>
                 </div>

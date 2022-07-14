@@ -4,7 +4,7 @@ import './index.scss';
 import Button from "../button";
 
 const ScrollButton = () =>{
-    // const [visible, setVisible] = React.useState(true)
+    // const [visible, setVisible] =  useState(true)
     //
     // const toggleVisible = () => {
     //     const scrolled = document.documentElement.scrollTop;

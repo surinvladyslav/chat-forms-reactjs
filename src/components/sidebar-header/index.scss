@@ -15,7 +15,7 @@
   justify-content: space-between;
   align-items: center;
   position: relative;
-  padding: .4rem 0;
+  padding: .5rem 0;
   &.base {
     justify-content: flex-end;
   }
@@ -106,7 +106,7 @@
   width: 6px;
   height: 6px;
   border-radius: 50%;
-  background-color: #3390ec;
+  background-color: #effaff;
   margin: 0 0.5px;
   display: inline-block;
   vertical-align: middle;
@@ -222,9 +222,10 @@
   box-shadow: 0px 2px 8px 1px rgb(0 0 0 / 24%);
 }
 
-.btn-menu {
-  margin-top: 0.5rem;
-  margin-right: 0.5rem;
+@media (max-width: 600px) {
+  .btn-menu {
+    margin-right: 1rem !important;
+  }
 }
 
 .btn-menu-item:hover, .btn-menu-item:active {
@@ -253,13 +254,6 @@
 
 .btn-menu:not(.active), .btn-menu:not(.active) .btn-menu-item {
   pointer-events: none !important;
-}
-.rp {
-  position: relative;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
 }
 
 .btn-menu-item {

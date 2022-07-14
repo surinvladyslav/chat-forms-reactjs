@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 import ImportPage from "./pages/import";
 import {Route, Routes, useLocation} from "react-router-dom";
 import Loader from "./components/loader";

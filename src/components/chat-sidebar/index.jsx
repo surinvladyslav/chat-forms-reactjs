@@ -1,17 +1,19 @@
-import * as React from 'react';
+import React, {useCallback, useEffect} from 'react';
 
-import './index.scss';
+import cx from "classnames";
+
 import Button from "../button";
 import Avatar from "../avatar";
-import {useContext} from "../../store/context";
-import cx from "classnames";
-import {actions} from "../../store/reducer";
 import Scrollable from "../scrollable";
+import {useContext} from "../../store/context";
+import {actions} from "../../store/reducers";
 
-const Sidebar = () => {
-    const {dispatch, sidebar} = useContext()
+import './index.scss';
 
-    const data = [
+const ChatSidebar = () => {
+    const {dispatch, chatSidebar} = useContext()
+
+    const chatSidebarData = [
         {
             title: 'Ш++',
             subtitle: 'Username',
@@ -83,13 +85,13 @@ const Sidebar = () => {
         }
     ]
 
-    const escFunction = React.useCallback((event) => {
+    const escFunction = useCallback((event) => {
         if (event.keyCode === 27) {
-            dispatch({type: actions.SIDEBAR, payload: false})
+            dispatch({type: actions.CHAT_SIDEBAR, payload: false})
         }
     }, []);
 
-    React.useEffect(() => {
+     useEffect(() => {
         document.addEventListener("keydown", escFunction, false);
 
         return () => {
@@ -98,11 +100,11 @@ const Sidebar = () => {
     }, []);
 
     function closeSidebar() {
-        dispatch({type: actions.SIDEBAR, payload: false})
+        dispatch({type: actions.CHAT_SIDEBAR, payload: false})
     }
 
     return (
-        <div className={cx("sidebar-content", {'active': sidebar})}>
+        <div className={cx("sidebar-content", {"active": chatSidebar})}>
             <div className="tabs-tab">
                 <div className="sidebar-content-header">
                     <Button className={'btn-icon silver'} onClick={closeSidebar}>
@@ -129,7 +131,7 @@ const Sidebar = () => {
                                         <span className="peer-title">Bot</span>
                                     </div>
                                     {
-                                        data.map((row) => (
+                                        chatSidebarData.map((row) => (
                                             <div className="row row-with-icon row-with-padding" key={row.title}>
                                                 {row.image}
                                                 <div className="row-wrapper" dir="auto">
@@ -153,4 +155,4 @@ const Sidebar = () => {
     );
 }
 
-export default Sidebar;
+export default ChatSidebar;

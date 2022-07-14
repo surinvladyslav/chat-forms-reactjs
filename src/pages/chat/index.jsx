@@ -1,29 +1,33 @@
-import * as React from 'react';
+import React, {useEffect, useState} from 'react';
 
 import ChatInput from "../../components/chat-input";
-import SidebarHeader from "../../components/sidebar-header";
 import Content from "../../components/content";
-import Sidebar from "../../components/sidebar";
 import Dropdown from "../../components/dropdown";
 import {useContext} from "../../store/context";
-import {actions} from "../../store/reducer";
-import Popup from "../../components/popup";
+import ChatSidebarHeader from "../../components/sidebar-header";
+import ChatSidebar from "../../components/chat-sidebar";
+import {actions} from "../../store/reducers";
+import PopupConfirm from "../../components/popup-confirm";
 import PopupCopied from "../../components/popup-copied";
 
 import './index.scss';
 
 const Chat = () => {
-    const { dispatch, messages, formData } = useContext()
-    const [x, setX] = React.useState()
-    const [y, setY] = React.useState()
-    const [check, setCheck] = React.useState(undefined)
-    const [id, setId] = React.useState()
+    const {dispatch, chatMessages} = useContext()
+    const [messagePopupX, setMessagePopupX] = useState()
+    const [messagePopupY, setMessagePopupY] = useState()
+    const [checkMessageStatus, setCheckMessageStatus] = useState(undefined)
+    const [messageId, setMessageId] = useState()
 
-    React.useEffect(() => {
-        setCheck(formData && formData.find((item) => item.itemId === id))
-    },[id])
+     useEffect(() => {
+         setCheckMessageStatus(chatMessages && chatMessages.find((message) => {
+            if (message.itemId === messageId) {
+                return !message.is
+            }
+        }))
+    },[messageId])
 
-    function handleOutside() {
+    function handleOutsideMessage() {
         setTimeout(() => {
             dispatch({type: actions.MESSAGE_DROPDOWN, payload: false})
         }, 200)
@@ -36,40 +40,41 @@ const Chat = () => {
 
     function deleteMessage(){
         dispatch({type: actions.MESSAGE_DROPDOWN, payload: false})
-        dispatch({type: actions.POPUP, payload: true})
+        dispatch({type: actions.CHAT_POPUP_CONFIRM, payload: true})
     }
 
     const copyMessage = async () => {
-        try {
-            dispatch({type: actions.MESSAGE_DROPDOWN, payload: false})
-            const message = messages.find((message) => message.itemId === id)
-            await navigator.clipboard.writeText(message.title);
-            dispatch({type: actions.POPUP_COPIED, payload: true})
-        } catch (error) {
-            console.error(error)
-        }
+        dispatch({type: actions.MESSAGE_DROPDOWN, payload: false})
+        const message = chatMessages.find((message) => message.itemId === messageId)
+        await navigator.clipboard.writeText(message.title);
+        dispatch({type: actions.CHAT_POPUP_COPIED, payload: true})
     };
 
-    function onClick(event){
-        setX(event.pageX)
-        setY(event.pageY)
+    function clickMessage(event){
+        setMessagePopupX(event.pageX)
+        setMessagePopupY(event.pageY)
         dispatch({type: actions.MESSAGE_DROPDOWN, payload: true})
-        setId(event.currentTarget.getAttribute('data-id'))
+        setMessageId(event.currentTarget.getAttribute('data-message-id'))
     }
 
     return (
         <>
-            <Sidebar/>
-            <SidebarHeader/>
-            <Content onClick={onClick}/>
-            <ChatInput id={id}/>
+            <ChatSidebar/>
+            <ChatSidebarHeader/>
+            <Content onClick={clickMessage}/>
+            {/*{*/}
+            {/*   auth ?*/}
+            {/*   <ChatInput id={id}/> :*/}
+            {/*   <Button className={'btn-primary'} onClick={() => setAuth(true)}>start</Button>*/}
+            {/*}*/}
+            <ChatInput messageId={messageId}/>
             <Dropdown
                 className={'dropdown-message contextmenu bottom-center'}
-                style={{top: y/1.1, left: x/1.4}}
-                onMouseLeave={handleOutside}
+                style={{top: messagePopupY/1.1, left: messagePopupX/1.4}}
+                onMouseLeave={handleOutsideMessage}
             >
                 {
-                    !check &&
+                    checkMessageStatus &&
                     <div
                         className="dropdown-message-item"
                         onClick={editMessage}
@@ -95,7 +100,7 @@ const Chat = () => {
                     Copy
                 </div>
                 {
-                    !check &&
+                    checkMessageStatus &&
                     <div
                         className="dropdown-message-item danger"
                         onClick={deleteMessage}
@@ -110,9 +115,8 @@ const Chat = () => {
                     </div>
                 }
             </Dropdown>
-            <Popup id={id}/>
+            <PopupConfirm messageId={messageId}/>
             <PopupCopied/>
-            {/*<ChatAnswers/>*/}
         </>
     );
 }

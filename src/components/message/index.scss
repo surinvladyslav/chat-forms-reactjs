@@ -224,3 +224,11 @@
 .bubble.is-in.can-have-tail .bubble-content {
   border-bottom-left-radius: 0 !important;
 }
+
+.bubble.is-in .bubble-content {
+  border-bottom-left-radius: 6px !important;
+}
+
+.bubble.is-out .bubble-content {
+  border-bottom-right-radius: 6px !important;
+}

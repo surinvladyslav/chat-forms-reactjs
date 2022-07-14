@@ -1,15 +1,15 @@
-import * as React from 'react';
+import React from 'react';
 
 import cx from "classnames";
 import {useContext} from "../../store/context";
 
 import './index.scss';
 
-const Dropdown = ({ children, className, style, onMouseLeave}) => {
-    const { dropdown, messageDropdown } = useContext()
+const ChatDropdown = ({ children, className, style, onMouseLeave}) => {
+    const { chatDropdown, messageDropdown } = useContext()
     return (
         <div
-            className={cx(className, {'open': dropdown, 'active': messageDropdown})}
+            className={cx(className, {'open': chatDropdown, 'active': messageDropdown})}
             onMouseLeave={onMouseLeave}
             style={style}
         >
@@ -18,4 +18,4 @@ const Dropdown = ({ children, className, style, onMouseLeave}) => {
     );
 }
 
-export default Dropdown;
+export default ChatDropdown;

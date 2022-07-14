@@ -1,11 +1,11 @@
-import * as React from 'react';
+import React from 'react';
 import cx from 'classnames'
 
 import './index.scss';
 
-const Message = ({children, tail, read, edited, is, itemId, date, onClick}) => {
-    // const [tick, setTick] = React.useState(read)
-    // React.useEffect(() => {
+const Message = ({children, tail, read, edited, is, id, date, onClick}) => {
+    // const [tick, setTick] =  useState(read)
+    //  useEffect(() => {
     //     setTimeout(() => {
     //         setTick(true)
     //     }, 300)
@@ -18,7 +18,7 @@ const Message = ({children, tail, read, edited, is, itemId, date, onClick}) => {
                 'can-have-tail': tail
             })}
             onClick={onClick}
-            data-id={itemId}
+            data-message-id={id}
         >
             <div className="bubble-content-wrapper">
                 <div className="bubble-content">

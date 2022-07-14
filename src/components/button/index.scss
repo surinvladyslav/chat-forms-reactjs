@@ -161,3 +161,42 @@
     transform: scale(1);
   }
 }
+
+.btn-primary {
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  overflow: hidden;
+  position: relative;
+  align-items: center;
+  background-color: white;
+  color: #000;
+  display: flex;
+  font-weight: 500;
+  height: 3.4rem;
+  font-size: 1rem;
+  line-height: 1.3125;
+  padding: 0 1rem;
+  margin: 0 auto;
+  margin-top: .5rem;
+  margin-bottom: 1rem;
+  flex-direction: column;
+  justify-content: center;
+  text-transform: uppercase;
+  transition: background-color .2s,opacity .2s;
+  z-index: 3;
+  flex: 0 0 auto;
+
+  &:hover {
+    background-color: #f4f4f5;
+  }
+}
+
+@media (max-width: 600px) {
+  .btn-primary {
+    width: 100%;
+    padding: 0;
+    margin-bottom: 0;
+    border-radius: 0;
+  }
+}
