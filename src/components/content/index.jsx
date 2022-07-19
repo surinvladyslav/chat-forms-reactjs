@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, {createRef, useCallback, useEffect, useRef} from 'react';
 
 import Time from "../time";
 import Scrollable from "../scrollable";
@@ -11,7 +11,8 @@ import random from "../../hooks/useRandom";
 import './index.scss';
 
 const Content = ({onClick}) => {
-    const {chatMessages, formData, dispatch, chatIndex} = useContext();
+    const {chatMessages, formData, dispatch} = useContext();
+    const scrollableRef = useRef();
     const basePhrases = [
         'Hi',
         `Welcome to ${formData ? formData.info.title : 'Bot'}`,
@@ -24,6 +25,7 @@ const Content = ({onClick}) => {
             '\n' +
             'The studying is hard: it doesn\'t make sense without self-discipline, belief in yourself and independent work.',
         'Ready for a few questions?',
+        `Question 1 out of ${formData ? formData.items.length : 1}`,
         'To fill out this form, you must be signed in to your Google account'
     ];
 
@@ -38,6 +40,7 @@ const Content = ({onClick}) => {
                     edited: false,
                     read: false,
                     is: true,
+                    image: text === basePhrases[1] ? true : false,
                     date: new Date().toLocaleTimeString('en-GB', {
                         hour12: false,
                         hour: "numeric",
@@ -49,37 +52,51 @@ const Content = ({onClick}) => {
     }
 
     useOnceCall(() => {
-        // dispatch({type: actions.CLEAR_MESSAGES})
         if (!chatMessages.find(message => message.title === basePhrases[4])) {
             dispatch({type: actions.CLEAR_MESSAGES})
             dispatch({type: actions.CHAT_TYPING, payload: true})
             for (let i = 0; i < basePhrases.length; i++) {
                 setTimeout(() => {
                     addMessage(basePhrases[i])
-                }, i * 1500)
+                }, i * 1000)
             }
-            setTimeout(() => {
-                china()
-            }, basePhrases.length * 1500)
         }
     })
 
-    function china() {
-        setTimeout(() => {
-            addMessage(formData.items[chatIndex].title, formData.items[chatIndex].itemId)
-        }, 1500)
-        setTimeout(() => {
-            dispatch({type: actions.CHAT_TYPING, payload: false})
-        }, 1500)
+    const toggleVisibleScrollButton = () => {
+        const scrolled = scrollableRef.current?.scrollTop
+        if (scrolled > 100) {
+            return dispatch({type: actions.CHAT_SCROLL_BUTTON, payload: false})
+        }
+        if (scrolled <= 100) {
+            return dispatch({type: actions.CHAT_SCROLL_BUTTON, payload: true})
+        }
+    };
+
+    scrollableRef.current?.addEventListener('scroll', toggleVisibleScrollButton);
+
+    const scrollToBottomWithSmoothScroll = () => {
+        scrollableRef.current?.scrollTo({
+            top: scrollableRef.current?.scrollHeight,
+            behavior: 'smooth',
+        })
     }
 
-    // useEffect(() => {
-    //     china()
-    // }, [chatIndex, chatMessages])
+    const scrollToBottom = () => {
+        scrollableRef.current.scrollTop = scrollableRef.current?.scrollHeight;
+    };
+
+    useEffect(() => {
+        scrollToBottom()
+    }, []);
+
+    useEffect(() => {
+        scrollToBottomWithSmoothScroll()
+    }, [chatMessages]);
 
     return (
         <div className="bubbles">
-            <Scrollable>
+            <Scrollable ref={scrollableRef}>
                 <div className="bubbles-inner">
                     <div className="bubbles-date-group">
                         <Time/>

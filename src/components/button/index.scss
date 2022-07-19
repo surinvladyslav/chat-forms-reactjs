@@ -121,7 +121,7 @@
     }
   }
 
-  &.keyboard {
+  &.cancel {
     & svg {
       width: 1.7rem;
       height: auto;
@@ -163,20 +163,20 @@
 }
 
 .btn-primary {
-  border: none;
+  border: 2px solid #5f99ca;
+  color: #5f99ca;
+  font-size: .9375rem;
+  font-weight: 500;
+  height: 2.5rem;
+  text-align: center;
   border-radius: 10px;
   cursor: pointer;
   overflow: hidden;
-  position: relative;
   align-items: center;
   background-color: white;
-  color: #000;
   display: flex;
-  font-weight: 500;
-  height: 3.4rem;
-  font-size: 1rem;
   line-height: 1.3125;
-  padding: 0 1rem;
+  padding: 0rem 1.5rem;
   margin: 0 auto;
   margin-top: .5rem;
   margin-bottom: 1rem;
@@ -188,15 +188,16 @@
   flex: 0 0 auto;
 
   &:hover {
-    background-color: #f4f4f5;
+    background-color: #5f99ca;
+    color: #fff;
   }
 }
 
-@media (max-width: 600px) {
-  .btn-primary {
-    width: 100%;
-    padding: 0;
-    margin-bottom: 0;
-    border-radius: 0;
-  }
-}
+//@media (max-width: 600px) {
+//  .btn-primary {
+//    width: 100%;
+//    padding: 0;
+//    margin-bottom: 0;
+//    border-radius: 0;
+//  }
+//}

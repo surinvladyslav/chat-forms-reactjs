@@ -23,7 +23,6 @@ const Import = () => {
             viewId: 'FORMS',
             callbackFunction: (data) => {
                 if (data.action === 'picked') {
-                    dispatch({type: actions.APP_LOADER, payload: true})
                     setForm(data.docs[0])
                 }
             },
@@ -43,8 +42,11 @@ const Import = () => {
                 dispatch({type: actions.FORM_DATA, payload: response})
                 dispatch({type: actions.FORM_ID, payload: response.formId})
             })
-            dispatch({type: actions.APP_LOADER, payload: false})
-            navigate('/chat')
+            dispatch({type: actions.APP_LOADER, payload: true})
+            setTimeout(() => {
+                dispatch({type: actions.APP_LOADER, payload: false})
+                navigate('/share')
+            }, 2000)
         }
     }, [form])
 

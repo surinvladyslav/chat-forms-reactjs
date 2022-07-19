@@ -14,11 +14,14 @@ export const Context = ({children}) => {
             appLoader: false,
             chatSidebar: false,
             chatIndex: store?.chatIndex ? store.chatIndex : 0,
+            // chatIndex: 0,
             chatTyping: false,
             chatDraft: store?.chatDraft ? store.chatDraft : "",
             chatDropdown: false,
             chatPopupConfirm: false,
-            chatAnswers: false,
+            chatScrollButton: false,
+            chatAnswers: [],
+            chatPopupAnswers: false,
             chatPopupCopied: false,
         }),
         messageState: useReducer(messagesReducer, {
@@ -29,6 +32,7 @@ export const Context = ({children}) => {
         formsState: useReducer(formsReducer, {
             googleAuth: store?.googleAuth ? store.googleAuth : null,
             formData: store?.formData ? store.formData : null,
+            formImage: 'https://lh4.googleusercontent.com/0QamtH-IShBVL1SskiR0EhyYqIhVcyaxWEkxjF03AHzN6v29uucfSBj2U3pvEaeMbukWrre-r3l7yYIW-ok2bd_gI_nxhHRKIxDuKJL3boDCOKlzloHSW0xxijHvWJPqM2vk6sLAwJ4DJKx2on9kxfdNCw',
             formId: store?.formId ? store.formId : null,
             formBaseData: store?.formBaseData ? store.formBaseData : null,
         }),

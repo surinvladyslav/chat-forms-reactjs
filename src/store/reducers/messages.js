@@ -19,8 +19,8 @@ const messagesReducer = (state, action) => {
             return {...state, messageDropdown: payload}
         case actions.CLEAR_MESSAGES:
             return {...state, chatMessages: []}
-        case actions.EDITED:
-            return {...state, edited: payload}
+        case actions.EDIT_MESSAGE:
+            return {...state, editMessage: payload}
         default:
             return state
     }

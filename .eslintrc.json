@@ -25,6 +25,7 @@
         "react/no-unescaped-entities": 0,
         "react/react-in-jsx-scope": "off",
         "semi": "off",
-        "@typescript-eslint/semi": "off"
+        "@typescript-eslint/semi": "off",
+        "react/display-name": "off"
     }
 }

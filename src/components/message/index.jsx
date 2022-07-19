@@ -2,8 +2,10 @@ import React from 'react';
 import cx from 'classnames'
 
 import './index.scss';
+import {useContext} from "../../store/context";
 
-const Message = ({children, tail, read, edited, is, id, date, onClick}) => {
+const Message = ({children, tail, read, edited, is, id, date, image, onClick}) => {
+    const {formImage} = useContext()
     // const [tick, setTick] =  useState(read)
     //  useEffect(() => {
     //     setTimeout(() => {
@@ -25,7 +27,7 @@ const Message = ({children, tail, read, edited, is, id, date, onClick}) => {
                     <div className="message">
                         {children}
                         <span className="time tgico">
-                            <span className="i18n" style={{ opacity: 0, marginLeft: '0.5rem'}}>{date} PM</span>
+                            <span className="i18n" style={{ opacity: 0, marginLeft: '0.5rem'}}>{date}</span>
                             <i className="edited i18n" style={{ opacity: '0 !important', margin: 0}}>edited</i>
                             {
                                 read ?
@@ -43,7 +45,7 @@ const Message = ({children, tail, read, edited, is, id, date, onClick}) => {
                             }
                             <div className="inner tgico">
                                 <i className="edited i18n">edited</i>
-                                <span className="i18n">{date} PM</span>
+                                <span className="i18n">{date}</span>
                                 {
                                     read ?
                                     <svg className="double-tick" xmlns="http://www.w3.org/2000/svg" version="1.0" width="512.000000pt" height="512.000000pt" viewBox="0 0 512.000000 512.000000" preserveAspectRatio="xMidYMid meet">
@@ -61,6 +63,12 @@ const Message = ({children, tail, read, edited, is, id, date, onClick}) => {
                             </div>
                         </span>
                     </div>
+                    {
+                        image &&
+                        <div className="attachment media-container">
+                            <img src={formImage}/>
+                        </div>
+                    }
                     <svg className="bubble-tail" width="9" height="20" xmlns="http://www.w3.org/2000/svg">
                         <defs>
                             <filter x="-50%" y="-14.7%" width="200%" height="141.2%" filterUnits="objectBoundingBox" id="a">

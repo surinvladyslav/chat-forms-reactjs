@@ -232,3 +232,78 @@
 .bubble.is-out .bubble-content {
   border-bottom-right-radius: 6px !important;
 }
+
+.bubble:not(.webpage):not(.is-album):not(.sticker):not(.round):not(.emoji-big) .attachment {
+  background-color: #000;
+}
+
+.bubble:not(.webpage):not(.is-album):not(.sticker):not(.round):not(.emoji-big) .attachment {
+  background-color: #000;
+}
+
+.bubble:not(.sticker) .attachment {
+  max-height: min(340px,100%);
+  max-width: min(420px,100%);
+  width: -webkit-max-content;
+  width: -moz-max-content;
+  width: max-content;
+}
+
+.bubble:not(.emoji-big) .attachment {
+  font-size: 0;
+}
+
+.bubble:not(.is-message-empty) .attachment {
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+.bubble:not(.sticker) .attachment {
+  max-height: min(340px,100%);
+  max-width: min(420px,100%);
+  width: -webkit-max-content;
+  width: -moz-max-content;
+  width: max-content;
+}
+
+.bubble:not(.emoji-big) .attachment {
+  font-size: 0;
+}
+
+.bubble:not(.is-message-empty) .attachment {
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+.bubble .attachment {
+  border-radius: inherit;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  max-width: 100%;
+  overflow: hidden;
+  position: relative;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.bubble img:not(.emoji), .bubble video {
+  height: 100%;
+  -o-object-fit: cover;
+  object-fit: cover;
+  width: 100%;
+}
+
+.bubble .attachment img, .bubble .attachment video {
+  max-width: 100%;
+}
+
+.media-photo {
+  bottom: 0;
+  left: 0;
+  position: absolute;
+  right: 0;
+  top: 0;
+}
