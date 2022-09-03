@@ -1,0 +1,140 @@
+.chat-tools {
+  padding: 0.5rem 0;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  flex: 0 0 auto;
+  grid-gap: 0.5rem;
+  max-width: 100%;
+  flex-direction: column;
+  margin: 0 auto;
+  transition: transform .25s cubic-bezier(.4, .0, .2, 1);
+
+  &.reverse {
+    @media (max-width: 600px) {
+      //padding-bottom: 0;
+      flex-direction: column-reverse;
+    }
+  }
+}
+
+.chat-tools-container {
+  display: flex;
+  align-items: flex-end;
+  width: 100%;
+  justify-content: center;
+  margin: 0 auto;
+  flex: 0 0 auto;
+}
+
+.rows-wrapper {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  //min-height: 2.5rem;
+  //height: auto;
+  grid-gap: 0.5rem;
+  align-items: center;
+}
+
+.react-time-picker__clear-button.react-time-picker__button,
+.react-time-picker__clock-button.react-time-picker__button{
+  display: none;
+}
+
+.input-message-input {
+  transition: height .1s;
+}
+
+.react-time-picker__wrapper {
+  border: none;
+}
+
+.picker__wrapper {
+  display: flex;
+  align-items: center;
+}
+
+.react-datepicker__input-container {
+  display: flex;
+  justify-content: center;
+}
+
+.react-time-picker__inputGroup__input.react-time-picker__inputGroup__hour,
+.react-time-picker__inputGroup__input.react-time-picker__inputGroup__minute{
+  outline: none;
+}
+
+.react-time-picker__clock.react-time-picker__clock--open {
+  display: none;
+}
+
+.react-time-picker__inputGroup__input.react-time-picker__inputGroup__amPm {
+  color: white;
+  outline: none;
+  background-color: #202020;
+}
+
+.react-datepicker__input-container input,
+.react-time-picker__inputGroup {
+  background-color: #212121;
+  border: 2px solid #3e618a;
+  border-radius: 12px;
+  color: white;
+  cursor: pointer;
+  padding: 0.65rem;
+  outline: none;
+  font-size: 15px;
+}
+
+[contenteditable=true] {
+  -webkit-user-select: text;
+  -moz-user-select: text;
+  -ms-user-select: text;
+  user-select: text;
+  outline: none;
+  cursor: text;
+  white-space: pre-wrap;
+}
+
+input {
+  caret-color: white;
+  color: white;
+  background-color: transparent;
+}
+
+input::placeholder {
+  color: #a2acb4;
+}
+
+@media (max-width: 600px) {
+  .chat-tools-message {
+    font-weight: 500;
+  }
+
+  .input-message-wrapper {
+    margin-bottom: -0.5rem;
+
+    & .input-message-input {
+      padding: 1.2rem 0rem;
+    }
+  }
+}
+
+@media only screen and (min-height: 570px) and (min-width: 601px) {
+  .chat-tools {
+    max-width: 670px !important;
+  }
+
+  .input-message-wrapper {
+    border-radius: 0.75rem;
+  }
+
+  .rows-wrapper {
+    padding: 0 .6rem;
+  }
+
+  .chat-tools-container {
+    max-width: 100%;
+  }
+}

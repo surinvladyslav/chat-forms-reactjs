@@ -23,21 +23,20 @@
 
 .bubble-content {
   min-width: 56px;
-  max-width: 100%;
+  max-width: 420px;
   border-radius: 12px;
   box-shadow: 0 1px 2px 0 rgb(16 35 47 / 15%);
-  position: relative;
   display: flex;
   flex-direction: column-reverse;
   z-index: 2;
-  background-color: #fff;
+  background-color: #212121;
 }
 
 .bubble.service .service-msg {
   color: #fff;
-  background-color: rgba(109,141,65,.4);
+  background-color: #000000b3;
   font-size: 0.89rem;
-  padding: 0.1rem 0.625rem;
+  padding: 0.3rem 0.6rem;
   line-height: 1.25rem;
   border-radius: inherit;
   -webkit-user-select: none;
@@ -59,6 +58,6 @@
 @media (max-width: 600px) {
 
   .bubble.service .service-msg {
-    padding: 0.15125rem 0.525rem;
+    padding: 0.3rem 0.5rem;
   }
 }

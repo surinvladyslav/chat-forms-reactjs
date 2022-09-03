@@ -3,6 +3,8 @@ import {actions} from "./index";
 const messagesReducer = (state, action) => {
     const {type, payload} = action;
     switch(type) {
+        case actions.ADD_SENTENCE:
+            return {...state, chatSentences: [...state.chatSentences, payload]}
         case actions.ADD_MESSAGE:
             return {...state, chatMessages: [...state.chatMessages, payload]}
         case actions.DELETE_MESSAGE:
@@ -17,8 +19,6 @@ const messagesReducer = (state, action) => {
             return {...state, chatMessages: [...state.chatMessages]}
         case actions.MESSAGE_DROPDOWN:
             return {...state, messageDropdown: payload}
-        case actions.CLEAR_MESSAGES:
-            return {...state, chatMessages: []}
         case actions.EDIT_MESSAGE:
             return {...state, editMessage: payload}
         default:

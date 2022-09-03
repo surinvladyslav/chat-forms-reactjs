@@ -163,41 +163,68 @@
 }
 
 .btn-primary {
-  border: 2px solid #5f99ca;
-  color: #5f99ca;
-  font-size: .9375rem;
-  font-weight: 500;
-  height: 2.5rem;
+  padding: 0.8rem 1rem;
+  background-color: #212121;
+  border: 2px solid #3e618a;
+  border-radius: 12px;
+  color: white;
+  font-size: 15px;
+  width: fit-content;
+  margin: 0 .2rem;
   text-align: center;
-  border-radius: 10px;
+  transition: color .15s,background-color .15s;
   cursor: pointer;
-  overflow: hidden;
-  align-items: center;
-  background-color: white;
-  display: flex;
-  line-height: 1.3125;
-  padding: 0rem 1.5rem;
-  margin: 0 auto;
-  margin-top: .5rem;
-  margin-bottom: 1rem;
-  flex-direction: column;
-  justify-content: center;
-  text-transform: uppercase;
-  transition: background-color .2s,opacity .2s;
-  z-index: 3;
-  flex: 0 0 auto;
+  outline: none;
+
+  & svg {
+    width: 14px;
+    margin-right: .3rem;
+    & path {
+      fill: #3e618a;
+    }
+  }
+
+  &.disabled {
+    color: #707579;
+    border-color: #707579;
+    user-select: none;
+    cursor: default;
+
+    &:hover {
+      background-color: #212121;
+      color: #707579;
+    }
+  }
+
+  &.skip {
+    margin-left: 0.6rem;
+    color: #707579;
+    border-color: #707579;
+    //padding: 0.4rem 1rem;
+    &:hover {
+      background-color: #707579;
+      color: #fff;
+    }
+  }
+
+  &.active {
+    background-color: #3e618a;
+    color: #fff;
+    & svg {
+      & path {
+        fill: #fff;
+      }
+    }
+  }
 
   &:hover {
-    background-color: #5f99ca;
+    background-color: #3e618a;
     color: #fff;
+
+    & svg {
+      & path {
+        fill: #fff;
+      }
+    }
   }
 }
-
-//@media (max-width: 600px) {
-//  .btn-primary {
-//    width: 100%;
-//    padding: 0;
-//    margin-bottom: 0;
-//    border-radius: 0;
-//  }
-//}

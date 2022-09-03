@@ -3,17 +3,20 @@ import cx from 'classnames';
 
 import './index.scss';
 
-const Button = ({children, className, onClick, style}) => {
+const Button = ({children, className, onClick, style, id}, args) => {
     // if(!className) {
-        return (
-            <button
-                className={className}
-                onClick={onClick}
-                style={style}
-            >
-                { children }
-            </button>
-        );
+    return (
+        <button
+            className={className}
+            id={id}
+            onClick={onClick}
+            style={style}
+            value={children}
+            {...args}
+        >
+            { children }
+        </button>
+    );
     // } else {
     //     return (
     //         <button

@@ -35,11 +35,7 @@
 }
 
 .tabs-container .tabs-tab {
-  background: url('https://web.telegram.org/k/assets/img/pattern.svg'), linear-gradient(-30deg, #dbddbb,#6ba587,#d5d88d,#88b884);
-  background-size: contain;
-  background-position: center center;
-  background-repeat: repeat;
-  background-blend-mode: soft-light;
+  background-color: #0f0f0f;
   flex-direction: column;
   grid-column-start: 1;
   grid-row-start: 1;
@@ -104,3 +100,5 @@
   position: absolute;
   width: 100%;
 }
+
+

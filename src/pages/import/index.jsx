@@ -1,67 +1,40 @@
 import React, {useEffect, useState} from 'react';
 
 import useDrivePicker from 'react-google-drive-picker'
-import { useNavigate } from 'react-router-dom';
-
-import { useContext } from "../../store/context";
-import { actions } from "../../store/reducers";
-import SidebarHeader from "../../components/sidebar-header";
-import useData from "../../hooks/useData";
+import {useSaveForms} from "../../hooks/useSaveForms";
 
 import './index.scss';
 
-const Import = () => {
-    const navigate = useNavigate();
+const ImportPage = () => {
     const [openPicker, authResponse] = useDrivePicker();
-    const [form, setForm] = useState(null)
-    const { dispatch } = useContext()
+    const [formId, setFormId] = useState(null)
+
+    useSaveForms(formId, authResponse?.access_token)
 
     const handleOpenPicker = async () => {
         openPicker({
             clientId: process.env.REACT_APP_CLIENT_ID,
             developerKey: process.env.REACT_APP_API_KEY,
             viewId: 'FORMS',
-            callbackFunction: (data) => {
+            callbackFunction: async (data) => {
                 if (data.action === 'picked') {
-                    setForm(data.docs[0])
+                    setFormId(data.docs[0].id)
                 }
             },
         })
     }
 
-     useEffect(() => {
-        if (authResponse) {
-            dispatch({type: actions.GOOGLE_AUTH, payload: authResponse})
-        }
-    }, [authResponse])
-
-     useEffect(() => {
-        if (form) {
-            dispatch({type: actions.FORM_BASE_DATA, payload: form})
-            useData(form.id, authResponse.access_token).then(response => {
-                dispatch({type: actions.FORM_DATA, payload: response})
-                dispatch({type: actions.FORM_ID, payload: response.formId})
-            })
-            dispatch({type: actions.APP_LOADER, payload: true})
-            setTimeout(() => {
-                dispatch({type: actions.APP_LOADER, payload: false})
-                navigate('/share')
-            }, 2000)
-        }
-    }, [form])
-
     return (
-        <>
-            <SidebarHeader/>
-            <div className="import">
-                <p className="import-subtitle">Please sign in and import your Google Form.</p>
-                <button
-                    className="import-button"
-                    onClick={handleOpenPicker}
-                >import</button>
-            </div>
-        </>
+        <button
+            onClick={handleOpenPicker}
+            style={{
+                position: "absolute",
+                top: "50%",
+                left: "50%",
+                transform: "translate(-50%, -50%)"
+            }}
+        >import from google forms</button>
     );
 }
 
-export default Import;
+export default ImportPage;

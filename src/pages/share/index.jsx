@@ -1,21 +1,34 @@
 import React from 'react';
 
-import './index.scss';
-import SidebarHeader from "../../components/sidebar-header";
+import {useParams} from "react-router-dom";
 
-const Share = () => {
+import './index.scss';
+
+const SharePage = () => {
+    const { id } = useParams()
+
     return (
-        <>
-            <SidebarHeader/>
-            <div className="import">
-                <p className="import-subtitle">Share it with the world.</p>
-                <button
-                    className="import-button"
-                    // onClick={handleOpenPicker}
-                >open</button>
-            </div>
-        </>
+        <div
+            style={{
+                position: "absolute",
+                top: "50%",
+                transform: "translateY(-50%)",
+                width: "100%",
+                display: "flex",
+                justifyContent: "center"
+            }}
+        >
+            <a
+                href={`${process.env.REACT_APP_URL}/forms/${id}`}
+                target="_blank"
+                rel="noreferrer"
+                style={{
+                    marginRight: "2rem"
+                }}
+            >open your chatbot</a>
+            <button>get your chatbot link</button>
+        </div>
     );
 }
 
-export default Share;
+export default SharePage;

@@ -46,11 +46,15 @@ html:not(.is-safari):not(.is-ios) ::-webkit-scrollbar-thumb {
 
 a {
   text-decoration: none;
-  color: #00488f;
 }
 
 img, video {
   -webkit-user-drag: none;
+}
+
+p {
+  margin: 0;
+  padding: 0;
 }
 
 img {
@@ -61,8 +65,9 @@ body {
   margin: 0;
   overflow: hidden;
   padding: 0;
-  color: #2a2a2a;
-  background-color: white;
+  color: white;
+  background-color: black;
+  font-size: 16px;
   font-weight: 400;
 }
 
@@ -74,6 +79,7 @@ body {
 @media (max-width: 600px) {
   body, button, p {
     font-weight: 500 !important;
+    font-size: 17px;
   }
 }
 
