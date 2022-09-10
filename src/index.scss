@@ -28,17 +28,17 @@ html, body {
   box-sizing: inherit;
 }
 
-html:not(.is-safari):not(.is-ios) ::-webkit-scrollbar-button {
+html:not(.is-safari):not(.is-ios)::-webkit-scrollbar-button {
   width: 0;
   height: 0;
   display: none;
 }
 
-html:not(.is-safari):not(.is-ios) ::-webkit-scrollbar-corner {
+html:not(.is-safari):not(.is-ios)::-webkit-scrollbar-corner {
   background-color: transparent;
 }
 
-html:not(.is-safari):not(.is-ios) ::-webkit-scrollbar-thumb {
+html:not(.is-safari):not(.is-ios)::-webkit-scrollbar-thumb {
   opacity: 0;
   -webkit-transition: .2s ease-in-out;
   transition: .2s ease-in-out;

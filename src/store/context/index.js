@@ -11,13 +11,13 @@ export const Context = ({children}) => {
         rootState: useReducer(rootReducer, {
             appLoader: false,
             chatSidebar: false,
-            chatIndex: -1,
+            chatIndex: 0,
             chatTyping: false,
             chatDropdown: false,
         }),
         messageState: useReducer(messagesReducer, {
             chatMessages: [],
-            chatSentences: [],
+            chatQuestions: [],
         }),
         formsState: useReducer(formsReducer, {
             formData: null,

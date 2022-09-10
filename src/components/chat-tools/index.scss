@@ -9,12 +9,17 @@
   flex-direction: column;
   margin: 0 auto;
   transition: transform .25s cubic-bezier(.4, .0, .2, 1);
+  position: relative;
+  max-height: 15rem;
 
   &.reverse {
     @media (max-width: 600px) {
-      //padding-bottom: 0;
       flex-direction: column-reverse;
     }
+  }
+
+  & .scrollable.scrollable-y {
+    position: unset;
   }
 }
 

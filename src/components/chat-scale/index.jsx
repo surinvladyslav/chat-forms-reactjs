@@ -7,10 +7,8 @@ import './index.scss';
 
 const ChatScale = ({scaleQuestion, onClick}) => {
     return (
-        scaleQuestion &&
         <div className="chat-questions">
             <div className="chat-questions-inner">
-                <p>{scaleQuestion?.lowLabel}</p>
                 {Array.from(Array(scaleQuestion?.high), (e, i) => {
                     return <Button
                         className={cx("btn-primary")}
@@ -20,7 +18,6 @@ const ChatScale = ({scaleQuestion, onClick}) => {
                         {i+1}
                     </Button>
                 })}
-                <p>{scaleQuestion?.highLabel}</p>
             </div>
         </div>
     );

@@ -2,34 +2,39 @@ import React from 'react';
 
 import cx from "classnames";
 import Button from "../button";
+import {useContext} from "../../store/context";
 
 import './index.scss';
+import Scrollable from "../scrollable";
 
-const ChatQuestion = ({choiceQuestion, onClick}) => {
+const ChatQuestion = ({
+    onClickQuestionRadio,
+    onClickQuestionCheckbox,
+    choiceQuestionsType
+}) => {
+    const {
+        chatQuestions,
+    } = useContext();
+
     return (
-        choiceQuestion &&
         <div className="chat-questions">
             <div className="chat-questions-inner">
+                {/*<Scrollable>*/}
                 {
-                    choiceQuestion?.options?.map((question, i) => (
+                    chatQuestions?.map((question, i) => (
                         !question?.isOther &&
                         <Button
                             className={cx("btn-primary", {"active": question.checked})}
                             key={i}
-                            onClick={(event) => onClick(
-                                choiceQuestion?.type.toLowerCase() === 'checkbox' ?
-                                choiceQuestion?.options?.find(question => {
-                                    if (question.itemId === event.currentTarget.id) {
-                                        question.checked = !question.checked
-                                        console.log(question);
-                                    }
-                                }) :
-                                event.currentTarget.value.substring(1)
-                            )}
-                            id={question.itemId}
+                            onClick={(event) => {
+                                choiceQuestionsType === 'checkbox' ?
+                                onClickQuestionCheckbox(chatQuestions?.find(question => question.questionId === event.currentTarget.id)) :
+                                onClickQuestionRadio(event.currentTarget.value.substring(1))
+                            }}
+                            id={question.questionId}
                         >
                             {
-                                choiceQuestion?.type.toLowerCase() === 'checkbox' ?
+                                choiceQuestionsType === 'checkbox' ?
                                     question.checked ?
                                     <svg xmlns="http://www.w3.org/2000/svg"
                                          width="14.143" height="14.142" viewBox="0 0 14.143 14.142">
@@ -49,7 +54,8 @@ const ChatQuestion = ({choiceQuestion, onClick}) => {
                         </Button>
                     ))
                 }
-            </div>
+            {/*</Scrollable>*/}
+        </div>
         </div>
     );
 }

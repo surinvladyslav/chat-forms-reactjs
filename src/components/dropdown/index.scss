@@ -45,8 +45,7 @@
   transform: scale(1);
   transition: .15s ease-in-out transform;
 
-  &:hover,
-  &:focus {
+  &:hover {
     background-color: rgba(0,0,0,0.0666667);
     color: whitesmoke;
   }
@@ -114,8 +113,7 @@
   transform: scale(1);
   white-space: nowrap;
 
-  &:hover,
-  &:focus {
+  &:hover {
     background-color: rgba(0,0,0,0.0666667);
   }
 
