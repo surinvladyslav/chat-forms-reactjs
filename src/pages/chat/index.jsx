@@ -1,35 +1,39 @@
 import React from 'react';
-import {useParams} from "react-router-dom";
+import {useParams} from 'react-router-dom';
 
-import ChatHeader from "../../components/chat-header";
-import ChatContent from "../../components/chat-content";
-import ChatTools from "../../components/chat-tools";
-import {useGetForms} from "../../hooks/useGetForms";
+import {Messages} from '../../components/messages';
+import {Tools} from '../../components/tools';
+import {ChatHeader} from '../../components/header';
+
+import {useGetForms} from '../../hooks/useGetForms';
+import {useContext} from '../../store/context';
 
 import './index.scss';
 
-const Chat = () => {
-    const { id } = useParams();
-    const formData = useGetForms(id)
+export const Chat = () => {
+  const {formData} = useContext();
+  const {id} = useParams();
 
-    return (
-        <div className="whole page-chats">
-            <div className="tabs-container" id="main-columns">
-                <div className="tabs-tab main-column">
-                    <div className="chats-container tabs-container">
-                        {
-                            formData &&
-                            <div className="chat tabs-tab active">
-                                <ChatHeader/>
-                                <ChatContent formData={formData}/>
-                                <ChatTools formData={formData}/>
-                            </div>
-                        }
-                    </div>
-                </div>
+  useGetForms(id);
+
+  return (
+    <div className="wrapper chat">
+      <div className="tabs-container">
+        <div className="tabs-tab main-column">
+          <div className="chats-container tabs-container">
+            <div className="chat tabs-tab active">
+              {
+                formData &&
+                <>
+                  <ChatHeader/>
+                  <Messages/>
+                  <Tools/>
+                </>
+              }
             </div>
+          </div>
         </div>
-    );
-}
-
-export default Chat;
+      </div>
+    </div>
+  );
+};

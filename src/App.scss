@@ -1,11 +1,15 @@
 @media only screen and (max-width: 600px) {
-  .bubbles-inner {
-    padding: 0 0.5rem;
-  }
-
   .tabs-container .tabs-tab {
     background-size: cover;
   }
+}
+
+.bg {
+  background-image: url("../public/images/background.png");
+  filter: blur(7px);
+  height: calc(100% - 90px);
+  background-position: center;
+  background-size: contain;
 }
 
 .animated {
@@ -20,7 +24,7 @@
     flex-direction: column;
 
     opacity: 0;
-    animation: .2s forwards animation ease-out;
+    animation: .3s forwards animation ease-out;
     position: absolute;
     top: 0;
     left: 0;
@@ -30,7 +34,6 @@
     z-index: 5;
     transform-origin: top right;
   }
-
 }
 
 @keyframes animation {

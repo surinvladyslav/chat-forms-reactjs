@@ -1,31 +1,32 @@
 import * as React from 'react';
-import {actions} from "../store/reducers";
-import {useEffect, useState} from "react";
-import {useContext} from "../store/context";
+import {useEffect} from 'react';
+
+import {actions} from '../store/reducers';
+import {useContext} from '../store/context';
 
 export const useGetForms = (id) => {
-    const {dispatch} = useContext();
-    const [formData, setFormData] = useState()
+  const {dispatch} = useContext();
 
-    useEffect(() => {
-        dispatch({type: actions.APP_LOADER, payload: true})
+  useEffect(() => {
+    // dispatch({type: actions.LOADER, payload: true});
 
-        fetch(`${process.env.REACT_APP_BACKEND_URL}/api/forms/${id}`).then((response) => {
-            if (response.ok) {
-                return response.json();
-            }
-            throw new Error(response.statusText);
-        })
-        .then((data) => {
-            console.log(data);
-            setFormData(data);
-            dispatch({type: actions.FORM_DATA, payload: data});
-            dispatch({type: actions.APP_LOADER, payload: false});
-        })
-        .catch((error) => {
-            console.log(error)
-        });
-    }, [])
+    const fetchData = async () => {
+      try {
+        const response = await fetch(
+          `${process.env.REACT_APP_BACKEND_URL}/api/forms/${id}`);
+        if (!response.ok) {
+          throw new Error(response.statusText);
+        }
+        const json = await response.json();
 
-    return formData;
+        dispatch({type: actions.FORM_DATA, payload: json});
+        // dispatch({type: actions.LOADER, payload: false});
+      }
+      catch (error) {
+        console.log('error', error);
+      }
+    };
+
+    fetchData();
+  }, []);
 };

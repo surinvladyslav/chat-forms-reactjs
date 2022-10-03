@@ -1,9 +1,19 @@
 .bubble {
-  position: relative;
   z-index: 1;
-  margin: 0 auto 0.25rem;
   display: flex;
+  animation: fadeIn 0.3s;
+  margin: 0 auto 0.25rem;
   flex-wrap: wrap;
+
+  position: relative;
+
+  &.is-in {
+    transform-origin: left bottom;
+  }
+
+  &.is-out {
+    transform-origin: right bottom;
+  }
 }
 
 .bubbles-inner:not(.is-scrolling) .bubble.is-date.is-sticky .bubble-content {
@@ -33,7 +43,7 @@
 .bubble.is-out {
   flex-direction: row-reverse;
   & .bubble-content {
-    background-color: #3e618a;
+    background-color: #00952E;
   }
 
   & .double-tick-wrapper {
@@ -51,7 +61,7 @@
     }
 
     & path {
-      fill: #84acd8;
+      fill: #c9e3c5;
     }
   }
 }
@@ -66,8 +76,9 @@
   line-height: 1.3125;
   word-break: break-word;
   white-space: pre-wrap;
-  color: #ffffff;
   padding-top: 6px;
+
+  text-align: initial;
 }
 
 .bubble:not(.webpage):not(.is-album):not(.sticker):not(.round):not(.emoji-big) .attachment {
@@ -89,8 +100,12 @@
 
 .bubble.is-out {
   & .time .inner {
-    color: #84acd8;
+    color: #c9e3c5;
     bottom: 4px;
+  }
+
+  & .message {
+    color: white;
   }
 }
 
@@ -126,14 +141,11 @@
   white-space: nowrap;
   height: 12px;
   visibility: visible;
-}
-
-.bubble .time .inner {
   bottom: 4px;
   padding-right: 5px;
   display: flex;
   align-items: center;
-  color: #5e5e5e;
+  color: #b1b1b1;
 }
 
 .bubble.is-out.is-edited .time i.edited {
