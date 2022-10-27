@@ -3,7 +3,7 @@ import cx from 'classnames';
 
 import './index.scss';
 
-export const Message = ({text, is, id, date, onClick}) => {
+export const Message = ({text, is, id, date, image, onClick}) => {
   const [tick, setTick] = useState(false);
 
   useEffect(() => {
@@ -82,12 +82,12 @@ export const Message = ({text, is, id, date, onClick}) => {
                 </div>
               </span>
           </div>
-          {/*{*/}
-          {/*    image &&*/}
-          {/*    <div className="attachment media-container">*/}
-          {/*        <img src={image}/>*/}
-          {/*    </div>*/}
-          {/*}*/}
+          {
+            image &&
+            <div className="attachment media-container">
+              <img src={image} alt="form image"/>
+            </div>
+          }
         </div>
       </div>
     </div>

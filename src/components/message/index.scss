@@ -82,8 +82,8 @@
 }
 
 .bubble:not(.webpage):not(.is-album):not(.sticker):not(.round):not(.emoji-big) .attachment {
-  background-color: #000;
-  border: 3px solid #212121;
+  background-color: #F4F4F4;
+  border: 3px solid #F4F4F4;
   border-bottom: 0;
   border-radius: 8px;
   width: auto;
@@ -132,7 +132,6 @@
   pointer-events: all;
   font-weight: 500;
   position: absolute;
-  bottom: 0;
   right: 0;
   display: flex;
   align-items: center;

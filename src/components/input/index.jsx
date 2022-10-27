@@ -10,7 +10,7 @@ export const Input = ({
   onClickQuestionCheckbox,
 }) => {
   const [value, setValue] = useState(null);
-  console.log(value);
+
   return (
     <div className="input-message-wrapper">
       <input

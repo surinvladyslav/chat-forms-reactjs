@@ -9,9 +9,5 @@ export const Loader = () => {
         <circle className="path" cx="50" cy="50" r="20" fill="none"/>
       </svg>
     </div>
-
-    // <div className="loader">
-    //   <div className="circle"></div>
-    // </div>
   );
 };

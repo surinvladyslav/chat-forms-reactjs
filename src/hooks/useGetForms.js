@@ -1,15 +1,13 @@
 import * as React from 'react';
 import {useEffect} from 'react';
 
-import {actions} from '../store/reducers';
+import {actions, alertTypes} from '../store/reducers';
 import {useContext} from '../store/context';
 
 export const useGetForms = (id) => {
   const {dispatch} = useContext();
 
   useEffect(() => {
-    // dispatch({type: actions.LOADER, payload: true});
-
     const fetchData = async () => {
       try {
         const response = await fetch(
@@ -17,13 +15,20 @@ export const useGetForms = (id) => {
         if (!response.ok) {
           throw new Error(response.statusText);
         }
-        const json = await response.json();
+        const data = await response.json();
 
-        dispatch({type: actions.FORM_DATA, payload: json});
-        // dispatch({type: actions.LOADER, payload: false});
+        dispatch({type: actions.FORM_DATA, payload: data});
       }
       catch (error) {
-        console.log('error', error);
+        dispatch({type: actions.LOADER, payload: true});
+        dispatch({
+          type: actions.ALERT,
+          payload: {
+            active: true,
+            type: alertTypes.error,
+            message: error.message,
+          },
+        });
       }
     };
 

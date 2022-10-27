@@ -15,10 +15,23 @@ export const useCreateForms = (id, token) => {
 
       const fetchData = async () => {
         try {
+          // let headers = new Headers();
+
+          // headers.append('Content-Type', 'application/json');
+          // headers.append('Accept', 'application/json');
+
+          // headers.append();
+          // headers.append('Access-Control-Allow-Credentials', 'true');
+
+          // headers.append('GET', 'POST', 'OPTIONS');
+
           const response = await fetch(
             `${process.env.REACT_APP_BACKEND_URL}/api/forms`, {
               method: 'POST',
-              headers: {'Content-Type': 'application/json'},
+              headers: {
+                'Content-Type': 'application/json',
+                'Access-Control-Allow-Origin': '*'
+              },
               body: JSON.stringify({
                 id,
                 token,

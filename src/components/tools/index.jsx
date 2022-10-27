@@ -77,7 +77,8 @@ export const Tools = () => {
   const createMessage = (message, is = false, type) => {
     if (message?.trim()) {
       dispatch({
-        type: actions.ADD_MESSAGE, payload: {
+        type: actions.ADD_MESSAGE,
+        payload: {
           text: message?.trim(),
           itemId: random(),
           type: type ? type : formData.items[chatIndex].type,
@@ -87,6 +88,8 @@ export const Tools = () => {
             hour: 'numeric',
             minute: 'numeric',
           }).toString(),
+          image: !!formData.items[chatIndex]?.image &&
+            formData.items[chatIndex]?.image,
         },
       });
 

@@ -1,8 +1,8 @@
 import * as React from 'react';
-import { useEffect } from "react";
+import {useEffect} from 'react';
 
-import { actions, alertTypes } from "../store/reducers";
-import { useContext } from "../store/context";
+import {actions, alertTypes} from '../store/reducers';
+import {useContext} from '../store/context';
 
 export const useSubmitForms = (id, submit) => {
     const { dispatch, messages } = useContext();
@@ -14,8 +14,6 @@ export const useSubmitForms = (id, submit) => {
 
     useEffect(() => {
         if (submit) {
-            // dispatch({type: actions.LOADER, payload: true});
-
             const fetchData = async () => {
                 try {
                     const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/forms/${id}`,{
@@ -30,8 +28,8 @@ export const useSubmitForms = (id, submit) => {
                     }
 
                     const json = await response.json();
-                    // dispatch({type: actions.LOADER, payload: false});
-                    dispatch({
+
+                  dispatch({
                         type: actions.ALERT,
                         payload: {
                             active: true,
@@ -48,7 +46,6 @@ export const useSubmitForms = (id, submit) => {
                             message: error.message
                         }
                     });
-                    console.log("error", error);
                 }
             };
 
